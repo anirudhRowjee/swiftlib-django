@@ -7,4 +7,4 @@ class Issue(models.Model):
     date_returned = models.DateField(blank=True)
 
     def __str__(self):
-        return self.user_issued  + " borrowed "+ self.book_issued
+        return self.user_issued  + " borrowed " +  self.book_issued
