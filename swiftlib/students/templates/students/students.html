@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> SwiftLib - Students </title>
+        <!-- CSS LINKS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/da8d57c989.js"></script>
+        <link rel="stylesheet" href="static/style.css">
+    </head>
+    <body>
+        <nav id='mainnav' class="navbar navbar-expand-lg navbar-dark">
+                <a class="navbar-brand" href="#" id='logo-text'>
+                    <img class='logo-img img-fluid' src='static/assets/logotext-w-trans.png'>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-bars std-icon whiteicon"></i>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+
+                         <li class="nav-item active nav-pill">
+                            <a class="nav-link" href="#"> <i class="fas fa-home std-icon"></i> Home </a>
+                        </li>
+
+                        <li class="nav-item nav-pill active-menu-item">
+                                <a class="nav-link" href="#"><i class="fas fa-user-graduate std-icon"></i>  Students </a>
+                        </li>
+
+                        <li class="nav-item nav-pill">
+                                <a class="nav-link" href="#"> <i class="fas fa-book-open std-icon"></i>  Books </a>
+                        </li>
+
+                        <li class="nav-item nav-pill">
+                                <a class="nav-link" href="#"> <i class="fas fa-clock std-icon"></i>  Issues </a>
+                        </li>
+        
+                    </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
+            </form>
+            </div>
+        </nav>
+        <div class='container'>
+            <div class='header mx-auto'>
+                <h1 class='pageheader-text'> STUDENTS </h1>
+            </div>
+            <div class='search'>
+                <form name='searchform' class='mx-auto searchform row input-group' method='POST'>
+                    <input type='text' id='searchbar' class='form-control' name='search_query' placeholder='search in students'>
+                    <button type='button' id='searchbutton' class='btn input-group-addon'><strong> GO </strong><i class="fas fa-angle-right"></i> </button>
+                </form>
+            </div>
+            <div class='results'>
+                
+            </div>
+            <br>
+            <div class='header mx-auto'>
+                <div class="row">
+                    <div class="btn-div col-sm">
+                        <button class='btn qa-button exception-button' data-toggle="modal" data-target="#addstudentmodal">
+                            <i class="fas fa-user-graduate stdicon qa-button-icon"></i><i class="fas fa-plus stdicon qa-button-icon"></i>
+                            <div class='header'> Add Student </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- STUDENT INFO SMALL -->
+            <div class='mx-auto header'>
+                <div class='std-info-mini row mx-auto container'>
+                    <p class='student-name col-sm my-auto'  data-toggle="modal" data-target="#student1info"> STUDENT 1 <i class="fas fa-id-card-alt stdicon whiteicon"></i> 12345 </p>
+                    <p class='student-name col-sm my-auto'>  </p>
+                    <button class='btn student-info-small-button col-sm my-auto'> Issue Book </button>
+                </div>
+            </div>
+            <div class='mx-auto header'>
+                <div class='std-info-mini row mx-auto container'>
+                    <p class='student-name col-sm my-auto' data-toggle="modal" data-target="#student2info"> STUDENT 2 <i class="fas fa-id-card-alt stdicon whiteicon"></i> 12345 </p>
+                    <p class='student-name col-sm my-auto borrowed'> BORROWED </p>
+                    <button class='btn student-info-small-button col-sm my-auto borrowed-button'> Return Book </button>
+                </div>
+            </div>
+            <div class='mx-auto header'>
+                <div class='std-info-mini row mx-auto container'>
+                    <p class='student-name col-sm my-auto'> STUDENT 3 <i class="fas fa-id-card-alt stdicon whiteicon"></i> 12345 </p>
+                    <p class='student-name col-sm my-auto'>  </p>
+                    <button class='btn student-info-small-button col-sm my-auto'> Issue Book </button>
+                </div>
+            </div>
+            <div class='mx-auto header'>
+                <div class='std-info-mini row mx-auto container'>
+                    <p class='student-name col-sm my-auto'> STUDENT 4 <i class="fas fa-id-card-alt stdicon whiteicon"></i> 12345 </p>
+                    <p class='student-name col-sm my-auto borrowed'> BORROWED </p>
+                    <button class='btn student-info-small-button col-sm my-auto borrowed-button'> Return Book </button>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Modal for student info - loops -->
+        <div class="modal fade" id="student1info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog s-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header s-modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"> Student Name <> ID</h5>
+                        <button type="button" class="close whiteicon" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body s-modal-body">
+                        <!-- IFRAME FOR STUDENT INFO PAGE HERE -->
+                        <iframe class='mx-auto iframe-custom' scrolling="no" src="student-info-form.html">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal to add student -->
+        <div class="modal fade" id="addstudentmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog s-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header s-modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Student</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body s-modal-body">
+                    <iframe class='mx-auto iframe-custom student-add-form' scrolling="no" src="student-add-form.html">
+                    </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <!-- JAVASCRIPT, JQUERY AND POPPER.JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script rel='application/javascript' src='static/app.js'></script>
+</html> 

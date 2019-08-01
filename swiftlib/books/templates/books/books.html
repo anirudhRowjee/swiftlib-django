@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> SwiftLib - Books </title>
+        <!-- CSS LINKS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/da8d57c989.js"></script>
+        <link rel="stylesheet" href="static/style.css">
+    </head>
+    <body>
+        <nav id='mainnav' class="navbar navbar-expand-lg navbar-dark">
+                <a class="navbar-brand" href="#" id='logo-text'>
+                    <img class='logo-img img-fluid' src='static/assets/logotext-w-trans.png'>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-bars std-icon whiteicon"></i>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                         <li class="nav-item nav-pill">
+                            <a class="nav-link" href="#"> <i class="fas fa-home std-icon"></i> Home </a>
+                        </li>
+
+                        <li class="nav-item nav-pill">
+                                <a class="nav-link" href="#"><i class="fas fa-user-graduate std-icon"></i>  Students </a>
+                        </li>
+
+                        <li class="nav-item active active-menu-item nav-pill">
+                                <a class="nav-link" href="#"> <i class="fas fa-book-open std-icon"></i>  Books </a>
+                        </li>
+
+                        <li class="nav-item nav-pill">
+                                <a class="nav-link" href="#"> <i class="fas fa-clock std-icon"></i>  Issues </a>
+                        </li>
+                    </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
+            </form>
+            </div>
+        </nav>
+        <div class='container'>
+            <div class='header mx-auto'>
+                <h1 class='pageheader-text'> BOOKS </h1>
+            </div>
+            <div class='search'>
+                <form name='searchform' class='mx-auto searchform row input-group' method='POST'>
+                    <input type='text' id='searchbar' class='form-control' name='search_query' placeholder='search in books'>
+                    <button type='button' id='searchbutton' class='btn input-group-addon'><strong> GO </strong><i class="fas fa-angle-right"></i> </button>
+                </form>
+            </div>
+            <div class='results'>
+                
+            </div>
+            <br>
+            <div class='header mx-auto'>
+                <div class="row">
+                    <div class="col-sm btn-div">
+                        <button class='btn qa-button ' data-toggle="modal" data-target="#addbookmodal">
+                            <i class="fas fa-book-open stdicon qa-button-icon"></i><i class="fas fa-plus stdicon qa-button-icon"></i> Add Book 
+                        </button>
+                    </div>
+                    <div class="col-sm btn-div">
+                        <button class='btn qa-button ' data-toggle="modal" data-target="#issuebookmodal">
+                            <i class="fas fa-book-open stdicon qa-button-icon"></i><i class="fas fa-arrow-up stdicon qa-button-icon"></i> Issue Book
+                        </button>
+                    </div>
+                    <div class="col-sm btn-div">
+                        <button class='btn qa-button ' data-toggle="modal" data-target="#returnbookmodal">
+                            <i class="fas fa-book-open stdicon qa-button-icon"></i><i class="fas fa-arrow-down stdicon qa-button-icon"></i> Return Book
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class='mx-auto header'>
+                <div class='std-info-mini row mx-auto container bookdata-container'>
+                    <p class='student-name col-sm my-auto'  data-toggle="modal" data-target="#book1info"> BOOK 1 <i class="fas fa-id-card-alt stdicon whiteicon"></i> Author 1 </p>
+                    <p class='student-name col-sm my-auto'> ISBN-10 : 123456890 </p>
+                    <p class='student-name col-sm my-auto'> ISBN-13 : 123456890 </p>
+                    <button class='btn student-info-small-button col-sm my-auto'> Issue Book </button>
+                </div>
+                <br>
+                <div class='std-info-mini row mx-auto container bookdata-container'>
+                    <p class='student-name col-sm my-auto'  data-toggle="modal" data-target="#book1info"> BOOK 1 <i class="fas fa-id-card-alt stdicon whiteicon"></i> Author 1 </p>
+                    <p class='student-name col-sm my-auto'> ISBN-10 : 123456890 </p>
+                    <p class='student-name col-sm my-auto'> ISBN-13 : 123456890 </p>
+                    <button class='btn student-info-small-button col-sm my-auto borrowed-button'> Return Book </button>
+                </div>
+                <br>
+                <div class='std-info-mini row mx-auto container bookdata-container'>
+                    <p class='student-name col-sm my-auto'  data-toggle="modal" data-target="#book1info"> BOOK 1 <i class="fas fa-id-card-alt stdicon whiteicon"></i> Author 1 </p>
+                    <p class='student-name col-sm my-auto'> ISBN-10 : 123456890 </p>
+                    <p class='student-name col-sm my-auto'> ISBN-13 : 123456890 </p>
+                    <button class='btn student-info-small-button col-sm my-auto'> Issue Book </button>
+                </div>
+                <br>
+                <div class='std-info-mini row mx-auto container bookdata-container'>
+                    <p class='student-name col-sm my-auto'  data-toggle="modal" data-target="#book1info"> BOOK 1 <i class="fas fa-id-card-alt stdicon whiteicon"></i> Author 1 </p>
+                    <p class='student-name col-sm my-auto'> ISBN-10 : 123456890 </p>
+                    <p class='student-name col-sm my-auto'> ISBN-13 : 123456890 </p>
+                    <button class='btn student-info-small-button col-sm my-auto borrowed-button'> Return Book </button>
+                </div>
+                <br>
+                <div class='std-info-mini row mx-auto container bookdata-container'>
+                    <p class='student-name col-sm my-auto'  data-toggle="modal" data-target="#book1info"> BOOK 1 <i class="fas fa-id-card-alt stdicon whiteicon"></i> Author 1 </p>
+                    <p class='student-name col-sm my-auto'> ISBN-10 : 123456890 </p>
+                    <p class='student-name col-sm my-auto'> ISBN-13 : 123456890 </p>
+                    <button class='btn student-info-small-button col-sm my-auto'> Issue Book </button>
+                </div>
+        </div>
+        <!-- Modal for book info - loops -->
+        <div class="modal fade" id="book1info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog s-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header s-modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"> Book <> Author </h5>
+                        <button type="button" class="close whiteicon" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body s-modal-body">
+                        <!-- IFRAME FOR book INFO PAGE HERE -->
+                        <p class='whiteicon'> Name : </p>
+                        <p class='whiteicon'> Author : </p>
+                        <p class='whiteicon'> Genre : </p>
+                        <p class='whiteicon'> ISBN-10 : </p>
+                        <p class='whiteicon'> ISBN-13 : </p>
+                        <p class='whiteicon'> Currently Borrowed by : </p>
+                        <button class='btn btn-danger'> Delete Book </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal to add book -->
+        <div class="modal fade" id="addbookmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog s-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header s-modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Book</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body s-modal-body">
+                    <iframe class='mx-auto iframe-custom add-book-form'  scrolling="no" src="add-book-form.html" >
+                    </iframe>
+                    
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Modal to issue book -->
+        <div class="modal fade" id="issuebookmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog s-modal" role="document">
+             <div class="modal-content">
+                 <div class="modal-header s-modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel">Issue book</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                     <span aria-hidden="true">&times;</span>
+                     </button>
+                 </div>
+                 <div class="modal-body s-modal-body">
+                    <iframe class='mx-auto iframe-custom issues-add-form'  scrolling="no" src="issues-add-form.html" >
+                    </iframe>
+                 </div>
+             </div>
+         </div>
+     </div>
+        <!-- Modal to return book -->
+        <div class="modal fade" id="returnbookmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog s-modal" role="document">
+             <div class="modal-content">
+                 <div class="modal-header s-modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel">Return book</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                     <span aria-hidden="true">&times;</span>
+                     </button>
+                 </div>
+                 <div class="modal-body s-modal-body">
+                    <iframe class='mx-auto iframe-custom issues-return-form'  scrolling="no" src="issues-return-form.html" >
+                    </iframe>
+                 </div>
+             </div>
+         </div>
+     </div>
+    </body>
+    <!-- JAVASCRIPT, JQUERY AND POPPER.JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script rel='application/javascript' src='static/app.js'></script>
+</html> 
