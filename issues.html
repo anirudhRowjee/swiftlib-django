@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %} Issues {% endblock %}
+
+{% block content %}
+     <div class='container'>
+         <div class='header mx-auto'>
+             <h1 class='pageheader-text'> ISSUES </h1>
+         </div>
+         <div class='search'>
+             <form name='searchform' class='mx-auto searchform row input-group' method='POST'>
+                 <input type='text' id='searchbar' class='form-control' name='search_query' placeholder='search in issues'>
+                 <button type='button' id='searchbutton' class='btn input-group-addon'><strong> GO </strong><i class="fas fa-angle-right"></i> </button>
+             </form>
+         </div>
+         <div class='results'>
+             
+         </div>
+         <br>
+
+         <div class='header mx-auto'>
+             <div class="row">
+                 <div class="col-sm btn-div">
+                     <button class='btn qa-button' data-toggle="modal" data-target="#addissuemodal">
+                         <i class="fas fa-clock stdicon qa-button-icon"></i><i class="fas fa-arrow-up stdicon qa-button-icon"></i> Issue Book
+                         </button>
+                 </div>
+                <div class="col-sm btn-div">
+                    <button class='btn qa-button' data-toggle="modal" data-target="#returnissuemodal">
+                        <i class="fas fa-clock stdicon qa-button-icon"></i><i class="fas fa-arrow-down stdicon qa-button-icon"></i> Return Book
+                    </button>
+                </div>
+             </div>
+         </div>
+         <!-- STUDENT INFO SMALL -->
+         <div class='mx-auto header'>
+             <div class='std-info-mini row mx-auto container'>
+                 <p class='student-name col-sm my-auto'  data-toggle="modal" data-target="#issue1info"> STUDENT 1 <i class="fas fa-id-card-alt stdicon whiteicon"></i> 12345 </p>
+                 <p class='student-name col-sm my-auto'>  </p>
+                 <button class='btn student-info-small-button col-sm my-auto'> Issue Book </button>
+             </div>
+         </div>
+     
+     </div>
+
+     <!-- Modal for issue info - loops -->
+     <div class="modal fade" id="issue1info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog s-modal" role="document">
+             <div class="modal-content">
+                 <div class="modal-header s-modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel"> Issue <> ID</h5>
+                     <button type="button" class="close whiteicon" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                     </button>
+                 </div>
+                 <div class="modal-body s-modal-body">
+                     <!-- IFRAME FOR  ISSUE INFO PAGE HERE -->
+                     <iframe class='mx-auto iframe-custom issues-add-form' scrolling="no" src="issues-info-form.html">
+                    </iframe>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+     <!-- Modal to issue book -->
+     <div class="modal fade" id="addissuemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog s-modal" role="document">
+             <div class="modal-content">
+                 <div class="modal-header s-modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel">Issue book</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                     <span aria-hidden="true">&times;</span>
+                     </button>
+                 </div>
+                 <div class="modal-body s-modal-body">
+                    <iframe class='mx-auto iframe-custom issues-add-form'  scrolling="no" src="issues-add-form.html" >
+                    </iframe>
+                 </div>
+             </div>
+         </div>
+     </div>
+       <!-- Modal to return book -->     
+         <div class="modal fade" id="returnissuemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div class="modal-dialog s-modal" role="document">
+             <div class="modal-content">
+                 <div class="modal-header s-modal-header">
+                     <h5 class="modal-title" id="exampleModalLabel">Return book</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                     <span aria-hidden="true">&times;</span>
+                     </button>
+                 </div>
+                 <div class="modal-body s-modal-body">
+                    <iframe class='mx-auto iframe-custom issues-return-form'  scrolling="no" src="issues-return-form.html" >
+                    </iframe>
+                 </div>
+             </div>
+         </div>
+     </div>
+{% endblock %}
