@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block activebooks %} active-menu-item {% endblock %}
+
 {% block title %} Books {% endblock %}
 
 {% block content %}
@@ -107,7 +109,7 @@
                         </button>
                     </div>
                     <div class="modal-body s-modal-body">
-                    <iframe class='mx-auto iframe-custom add-book-form'  scrolling="no" src="add-book-form.html" >
+                        <iframe class='mx-auto iframe-custom add-book-form'  scrolling="no" src="{% url 'addbook' %}" >
                     </iframe>
                     
                     </div>
