@@ -7,3 +7,9 @@ def home(request):
 
 def issuebook(request):
     return render(request, 'issues/issues-add-form.html')
+
+def returnbook(request):
+    return render(request, 'issues/issues-return-form.html')
+
+def bookinfo(request):
+    return render(request, 'issues/issues-info-form.html')

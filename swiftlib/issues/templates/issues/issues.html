@@ -8,16 +8,11 @@
          <div class='header mx-auto'>
              <h1 class='pageheader-text'> ISSUES </h1>
          </div>
-         <div class='search'>
-             <form name='searchform' class='mx-auto searchform row input-group' method='POST'>
-                 <input type='text' id='searchbar' class='form-control' name='search_query' placeholder='search in issues'>
-                 <button type='button' id='searchbutton' class='btn input-group-addon'><strong> GO </strong><i class="fas fa-angle-right"></i> </button>
-             </form>
-         </div>
+        
          <div class='results'>
              
          </div>
-         <br>
+         
 
          <div class='header mx-auto'>
              <div class="row">
@@ -56,7 +51,7 @@
                  </div>
                  <div class="modal-body s-modal-body">
                      <!-- IFRAME FOR  ISSUE INFO PAGE HERE -->
-                     <iframe class='mx-auto iframe-custom issues-add-form' scrolling="no" src="issues-info-form.html">
+                     <iframe class='mx-auto iframe-custom issues-add-form' scrolling="no" src="{ % url 'bookinfo' % }">
                     </iframe>
                  </div>
              </div>
@@ -91,7 +86,7 @@
                      </button>
                  </div>
                  <div class="modal-body s-modal-body">
-                    <iframe class='mx-auto iframe-custom issues-return-form'  scrolling="no" src="issues-return-form.html" >
+                    <iframe class='mx-auto iframe-custom issues-return-form'  scrolling="no" src="{% url 'returnbook'%}">
                     </iframe>
                  </div>
              </div>
