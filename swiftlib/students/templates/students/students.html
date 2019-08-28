@@ -66,7 +66,8 @@
                     </div>
                     <div class="modal-body s-modal-body">
                         <!-- IFRAME FOR STUDENT INFO PAGE HERE -->
-                        <iframe class='mx-auto iframe-custom' scrolling="no" src="student-info-form.html">
+                        <iframe class='mx-auto iframe-custom' scrolling="no" src="{% url 'students_add' %}">
+                        <!-- add student info functions and modify this URL reference -->
                         </iframe>
                     </div>
                 </div>
@@ -83,7 +84,7 @@
                         </button>
                     </div>
                     <div class="modal-body s-modal-body">
-                    <iframe class='mx-auto iframe-custom student-add-form' scrolling="no" src="student-add-form.html">
+                    <iframe class='mx-auto iframe-custom student-add-form' scrolling="no" src="{% url 'students_add' %}">
                     </iframe>
                     </div>
                 </div>
