@@ -1,0 +1,188 @@
+html {
+    height: 100%;
+    background-color: #020202;
+}
+
+body{
+    font-family: 'IBM Plex Sans';
+    background-color: transparent;
+}
+
+.redicon{color: red;}
+.greenicon{color: lightgreen;}
+.blueicon{color: lightblue;}
+.yellowicon{color: yellow;}
+.whiteicon{color:white;}
+.greyicon{color:grey;}
+.blackicon{color:black;}
+.mainicon{color:red}
+
+.vertical-center {
+    min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 100vh; /* These two lines are counted as one :-)       */
+  
+    display: flex;
+    align-items: center;
+}
+
+.navbar-logo{
+    height: 5em;
+    width: 5em;
+}
+
+.maintext{
+    color: #bffff1;
+}
+
+#mainnav{
+    background-color: #020202;
+    color: white;
+    position: sticky;
+    padding: none;
+}
+
+#logo-text{
+    font-family: 'IBM Plex Sans';
+}
+
+.logo-img{
+    height: 40px;
+}
+
+.std-icon{
+    padding: 0.5vw;
+    color: white;
+}
+
+.active-menu-item{
+    border: none;
+    border-bottom: 1px solid #3caa2b;
+}
+
+.nav-pill{
+    padding: none;
+}
+
+.logincard{
+    width: 50%;
+    font-family: 'IBM Plex Sans';
+}
+
+.loginbutton{
+    width: 100%;
+}
+
+.login-logo{
+    height:150px;
+    width: 150px;
+}   
+
+.header{
+    text-align: center;
+    padding: 10px;
+}
+
+.pageheader-text{
+    color: #bffff1;
+}
+
+.search{
+    text-align: center;
+}
+
+#searchbar{
+    height: 40px;
+    background-image: linear-gradient(to right, #00A7E1, #bffff1);
+    border: none;
+}
+
+#searchbar:focus{
+    outline: none;
+    outline-color: none;
+}
+
+#searchbutton{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    background-color: #bffff1;
+    font-family: 'IBM Plex Sans';
+}
+
+.quickaction-buttons{
+    display: inline-block;
+}
+
+.qa-button{
+    background-image: linear-gradient(to right, #ff6600, #bffff1);
+    width: 100%;
+    color: #020202;
+    padding: 10px;
+    border: none;
+}
+
+.qa-button-icon{
+    float: left;
+    color: #020202;
+}
+
+.stdicon{
+    padding: 1%;
+}
+
+.btn-div{
+    padding: 2%;
+}
+
+.student-name{
+    font-family: 'IBM Plex Sans';
+    padding: 2px;
+    color: #bffff1;
+    padding: 5px;
+}
+
+.std-info-mini{
+    margin-left: auto;
+    width: 100%;
+    border: 3px solid;
+    border-image-source: linear-gradient(to right,#00A7e1, #bffff1);
+    border-image-slice: 2%;
+    padding: 2%;
+}
+
+.std-info-small-button-group{
+    float: right;
+    padding: 5px;
+    width: 100%;
+}
+
+.student-info-small-button{
+    padding: 2px;
+    width: 100%;
+    background-color: #ff6600;
+}
+
+.borrowed{
+    color: red;
+}
+
+.borrowed-button{
+    background-color: red;
+    color: #bffff1;
+}
+
+.s-modal-header{
+    background-color: #020202;
+    color: #bffff1;
+    border-bottom: none;
+}
+
+.s-modal-body{
+    background-color: #020202;
+}
+
+.s-modal{
+    border: 5px solid #ff6600;
+    border-radius: 7px;
+    
+    
+}

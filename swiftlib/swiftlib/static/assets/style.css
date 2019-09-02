@@ -315,3 +315,17 @@ p {
   }
 }
 
+.infotext{
+    color: white;
+    padding: 0px;
+    font-size: 20px;
+}
+
+.info-fieldname{
+    font-style: bold;
+    color: #3caa2b;
+}
+
+.info-field{
+    float: right;
+}

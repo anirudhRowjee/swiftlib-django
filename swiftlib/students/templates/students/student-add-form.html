@@ -1,8 +1,10 @@
+{% load static %}
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/da8d57c989.js"></script>
-<link rel="stylesheet" href="static/style.css">
-<form action='submit' url='#' id='student-add-form' onsubmit='AddStudentSubmit()'>
+<link rel="stylesheet" href="{% static 'assets/style.css' %}">
+<form id='student-add-form' method='POST'>
+    {% csrf_token %}
     <div class='form-group custom-formgroup'>
         <label class='customlabel' for='studentname'> Student Name </label>
         <input type='text' class='form-control custom-input' name='student-name' placeholder='Student Name'>
@@ -13,10 +15,14 @@
     </div>
     <button class='btn btn-primary custom-submit-button' action='submit'> Submit </button>
     <small class="form-text text-muted"> Please ensure student name and unique ID are unique. </small>
+    {% if success_message %}
+        <small class='form-text text-muted greenicon'> {{ success_message }} </small>
+    {% elif failure_message %}
+        <small class='form-text text-muted redicon'> {{ failure_message }} </small>
+    {% endif %}
 </form>
-
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script rel='application/javascript' src='static/app.js'></script>
+<script rel='application/javascript' src="{% static 'assets/app.js' %}"></script>

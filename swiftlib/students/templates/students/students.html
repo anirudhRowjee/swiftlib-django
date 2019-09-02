@@ -2,6 +2,8 @@
 
 {% block title %} Students {% endblock %}
 
+{% block activestudents %} active-menu-item {% endblock %} 
+
 {% block content %}
         <div class='container'>
             <div class='header mx-auto'>
@@ -23,68 +25,50 @@
                 </div>
             </div>
             <!-- STUDENT INFO SMALL -->
+            {% for student in students %}
             <div class='mx-auto header'>
                 <div class='std-info-mini row mx-auto container'>
-                    <p class='student-name col-sm my-auto'  data-toggle="modal" data-target="#student1info"> STUDENT 1 <i class="fas fa-id-card-alt stdicon whiteicon"></i> 12345 </p>
+                    <p class='student-name col-sm my-auto'  data-toggle="modal" data-target="#{{student.pid}}info"> {{ student.name}} <i class="fas fa-id-card-alt stdicon whiteicon"></i> {{ student.pid }} </p>
                     <p class='student-name col-sm my-auto'>  </p>
                     <button class='btn student-info-small-button col-sm my-auto'> Issue Book </button>
                 </div>
             </div>
-            <div class='mx-auto header'>
-                <div class='std-info-mini row mx-auto container'>
-                    <p class='student-name col-sm my-auto' data-toggle="modal" data-target="#student2info"> STUDENT 2 <i class="fas fa-id-card-alt stdicon whiteicon"></i> 12345 </p>
-                    <p class='student-name col-sm my-auto borrowed'> BORROWED </p>
-                    <button class='btn student-info-small-button col-sm my-auto borrowed-button'> Return Book </button>
-                </div>
-            </div>
-            <div class='mx-auto header'>
-                <div class='std-info-mini row mx-auto container'>
-                    <p class='student-name col-sm my-auto'> STUDENT 3 <i class="fas fa-id-card-alt stdicon whiteicon"></i> 12345 </p>
-                    <p class='student-name col-sm my-auto'>  </p>
-                    <button class='btn student-info-small-button col-sm my-auto'> Issue Book </button>
-                </div>
-            </div>
-            <div class='mx-auto header'>
-                <div class='std-info-mini row mx-auto container'>
-                    <p class='student-name col-sm my-auto'> STUDENT 4 <i class="fas fa-id-card-alt stdicon whiteicon"></i> 12345 </p>
-                    <p class='student-name col-sm my-auto borrowed'> BORROWED </p>
-                    <button class='btn student-info-small-button col-sm my-auto borrowed-button'> Return Book </button>
-                </div>
-            </div>
-            
+            {% endfor %}
         </div>
 
         <!-- Modal for student info - loops -->
-        <div class="modal fade" id="student1info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {% for student in students %}
+        <div class="modal fade" id="{{student.pid}}info" tabindex="-1" role="dialog" aria-labelledby="{{student.pid}}info" aria-hidden="true">
             <div class="modal-dialog s-modal" role="document">
                 <div class="modal-content">
                     <div class="modal-header s-modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"> Student Name <> ID</h5>
+                        <h5 class="modal-title" id="exampleModalLabel"> {{ student.name }} >> {{ student.pid }} </h5>
                         <button type="button" class="close whiteicon" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body s-modal-body">
                         <!-- IFRAME FOR STUDENT INFO PAGE HERE -->
-                        <iframe class='mx-auto iframe-custom' scrolling="no" src="{% url 'students_add' %}">
+                        <iframe class='mx-auto iframe-custom' width='100%' scrolling="no" src="{% url 'students_info' pid=student.pid %}">
                         <!-- add student info functions and modify this URL reference -->
                         </iframe>
                     </div>
                 </div>
             </div>
         </div>
+        {% endfor %}
         <!-- Modal to add student -->
-        <div class="modal fade" id="addstudentmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="addstudentmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" onclose='window.location.reload()'>
             <div class="modal-dialog s-modal" role="document">
                 <div class="modal-content">
                     <div class="modal-header s-modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Add Student</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick='window.location.reload()'>
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body s-modal-body">
-                    <iframe class='mx-auto iframe-custom student-add-form' scrolling="no" src="{% url 'students_add' %}">
+                    <iframe class='mx-auto iframe-custom student-add-form' scrolling="no" width='100%' src="{% url 'students_add' %}">
                     </iframe>
                     </div>
                 </div>
