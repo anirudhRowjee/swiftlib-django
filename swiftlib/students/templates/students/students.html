@@ -24,6 +24,16 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- filter for empty students object - creation prompt -->
+            {% if not students.all %}
+            <div class='mx-auto header'>
+                
+                <h3> Please Add some Students !</h3>
+
+            </div>
+            {% endif %}
+
             <!-- STUDENT INFO SMALL -->
             {% for student in students %}
             <div class='mx-auto header'>

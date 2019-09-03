@@ -17,8 +17,16 @@ def addstudent(request):
     if request.method == 'POST':
         # create new student object
         data = request.POST
-        name = data.get('student-name')
-        pid = data.get('student-pid')
+        name = str(data.get('student-name'))
+        pid = str(data.get('student-pid'))
+        # escape all slash characters '/' with dashes '-'
+        '''
+        This is because using / causes the url router to break -
+        out format is 'info/<str:pid>', but if our pid is AA/BB/CC,
+        then our router transfers us to 'info/AA/BB/CC', which does not exist
+        as our URLs are not configured so deep
+        '''
+        pid = pid.replace('/', '-')
         new_student = Student(
             name  = name,
             pid = pid
@@ -41,4 +49,6 @@ def studentinfo(request, pid):
         context = {
             'failure_message': 'Student does not exist!'
         }
-    return render(request,'status.html', context)
+        return render(request, 'status.html', context)
+
+    return render(request,'students/student-info-form.html', context)

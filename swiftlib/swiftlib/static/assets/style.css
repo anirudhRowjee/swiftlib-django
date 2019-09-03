@@ -332,6 +332,14 @@ p {
 
 .notifier{
     color: white;
-    font-color: white
+    padding: 1px;
+}
+
+.success{
+    color: green;
+}
+
+.error{
+    color: red;
 }
 
