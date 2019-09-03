@@ -27,7 +27,7 @@ def addstudent(request):
         context = {
             'success_message': "Student " + new_student.name + " with ID " + str(new_student.pid) + " successfully created!"
         }
-        return render(request, 'students/student-add-form.html', context)
+        return render(request, 'status.html', context)
     else:
         return render(request, 'students/student-add-form.html')
 
@@ -41,4 +41,4 @@ def studentinfo(request, pid):
         context = {
             'failure_message': 'Student does not exist!'
         }
-    return render(request,'students/student-info-form.html', context)
+    return render(request,'status.html', context)

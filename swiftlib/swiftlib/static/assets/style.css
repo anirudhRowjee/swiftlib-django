@@ -329,3 +329,9 @@ p {
 .info-field{
     float: right;
 }
+
+.notifier{
+    color: white;
+    font-color: white
+}
+
