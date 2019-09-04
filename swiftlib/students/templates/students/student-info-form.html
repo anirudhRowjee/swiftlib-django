@@ -13,5 +13,11 @@
     <h1 class='infotext'> 
         <strong class='info-fieldname'> CURRENTLY BORROWED : </strong> <span class='info-field'> {{ student.book_issued }} </span> 
     </h1>
+    <br>
+    <form method='POST' action='submit'>
+        {% csrf_token %}
+        <input type='hidden' value='{{ student.pid }}' name='deletion_id'>
+        <button class='btn btn-danger' style='color:white;' > Delete Student </button>
+    </form>
 </div>
 

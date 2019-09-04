@@ -39,7 +39,7 @@
             <div class='mx-auto header'>
                 <div class='std-info-mini row mx-auto container'>
                     <p class='student-name col-sm my-auto'  data-toggle="modal" data-target="#{{student.pid}}info"> {{ student.name}} <i class="fas fa-id-card-alt stdicon whiteicon"></i> {{ student.pid }} </p>
-                    <p class='student-name col-sm my-auto'>  </p>
+                    <p class='student-name col-sm my-auto'> {{ student.book_issued }} </p>
                     <button class='btn student-info-small-button col-sm my-auto'> Issue Book </button>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                 <div class="modal-content">
                     <div class="modal-header s-modal-header">
                         <h5 class="modal-title" id="exampleModalLabel"> {{ student.name }} >> {{ student.pid }} </h5>
-                        <button type="button" class="close whiteicon" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close whiteicon" data-dismiss="modal" aria-label="Close" onclose='window.location.reload()'>
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
