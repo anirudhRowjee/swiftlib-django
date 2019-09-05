@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Home 
+{% endblock %}
+
+{% block activehome %} active-menu-item {% endblock %}
+
+
+{% block content %}
+    <div class='container'>
+    <div class='header mx-auto'>
+        <h1 class='pageheader-text'> WELCOME, USER </h1>
+    </div>                                                                                                                                         
+    <div class='search'>
+        <form name='searchform' class='mx-auto searchform row input-group' method='POST'>
+            <input type='text' id='searchbar' class='form-control' name='search_query' placeholder='looking for something?'>
+            <button type='button' id='searchbutton' class='btn input-group-addon'><strong> GO </strong><i class="fas fa-angle-right"></i> </button>
+        </form>
+    </div>
+    <div class='results'>
+        
+    </div>
+    <br>
+    <div class='header mx-auto'>
+        <h2 class='pageheader-text'> QUICK ACTIONS </h2>
+        <br>
+        <div class="row">
+            <div class="col-sm btn-div">
+                <button class='btn qa-button'>
+                    <i class="fas fa-book stdicon qa-button-icon"></i><i class="fas fa-arrow-up stdicon qa-button-icon"></i> Issue Book 
+                </button>
+            </div>
+            <div class="col-sm btn-div">
+                <button class='btn qa-button'>
+                    <i class="fas fa-book stdicon qa-button-icon"></i><i class="fas fa-arrow-down stdicon qa-button-icon"></i> Return Book 
+                    </button>
+            </div>
+            <div class="col-sm btn-div">
+                <button class='btn qa-button'>
+                <i class="fas fa-book stdicon qa-button-icon"></i><i class="fas fa-plus stdicon qa-button-icon"></i> Add Book 
+                </button>
+            </div>
+            <div class="col-sm btn-div">
+                <button class='btn qa-button'>
+                    <i class="fas fa-user-graduate stdicon qa-button-icon"></i><i class="fas fa-plus stdicon qa-button-icon"></i> Add Student 
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+

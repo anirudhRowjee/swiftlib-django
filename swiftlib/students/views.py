@@ -1,10 +1,10 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render
 from .models import Student
-# Create your views here.
 
 def home(request):
     if request.method == 'POST':
+        # blank method - we are not accepting any data through POST
         pass
     else:
         students = Student.objects.all()
@@ -56,25 +56,51 @@ def addstudent(request):
         # user wants to add data / is not reaching before any operation
         return render(request, 'students/student-add-form.html')
 
+
+
 def studentinfo(request, pid):
+
     if request.method == 'POST':
 
+        # get ID of student to be deleted form POST data
         data = request.POST
 
+        # assign that ID to locally-referenceable variable PID
         pid = data['deletion_id']
 
-
-        # TODO - add method to delete student based on PID passed in POST data
-    else:
         try:
+            # get relevant student object
+            student_to_be_deleted = Student.objects.get(pid=pid)
+
+        except ObjectDoesNotExist:
+            context = {
+                'failure_message': "The Student you are attempting to Delete does not Exist!"
+            }
+            return render(request, 'status.html', context)
+
+        # now that we have ensured that the student exists, we perform the deletion
+        student_to_be_deleted.delete()
+
+        context = {
+            'success_message': "Student " + str(pid) + " has been successfully deleted! "
+        }
+
+        return render(request, 'status.html', context)
+
+    else:
+
+        try:
+            # get student object whose data we need to return
             student = Student.objects.get(pid=pid)
             context = {
                 'student': student,
             }
+            return render(request,'students/student-info-form.html', context)
+
         except ObjectDoesNotExist:
+            # if the student does not exist, we handle this error
             context = {
                 'failure_message': 'Student does not exist!'
             }
             return render(request, 'status.html', context)
 
-        return render(request,'students/student-info-form.html', context)
