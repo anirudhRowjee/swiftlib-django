@@ -1,6 +1,29 @@
+# importing error classes
 from django.core.exceptions import ObjectDoesNotExist
+from django.db import IntegrityError
+
+#import render to return pages
 from django.shortcuts import render
+
+# import models
 from .models import Student
+
+# success and error message classes
+
+def send_success(request, message):
+    context = {
+        'failure_message': message
+        }
+    return render(request, 'status.html', context)
+
+def send_failure(request, message):
+    context = {
+        'failure_message': message
+        }
+    return render(request, 'status.html', context)
+
+
+# main function body
 
 def home(request):
     if request.method == 'POST':
@@ -43,7 +66,13 @@ def addstudent(request):
         )
 
         # save the new object
-        new_student.save()
+        try:
+            new_student.save()
+
+        # check if the student already exists
+        except IntegrityError:
+            message = 'This student already exists!'
+            return send_failure(request, message)
 
         # package success data
         context = {
@@ -71,6 +100,13 @@ def studentinfo(request, pid):
         try:
             # get relevant student object
             student_to_be_deleted = Student.objects.get(pid=pid)
+
+        except IntegrityError:
+            # catch duplicate IDs
+            context = {
+                'failure_message': "There is already a student with that ID!"
+            }
+            return render(request, 'status.html', context)
 
         except ObjectDoesNotExist:
             context = {
