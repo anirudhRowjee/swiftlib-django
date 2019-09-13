@@ -13,3 +13,10 @@ def returnbook(request):
 
 def bookinfo(request):
     return render(request, 'issues/issues-info-form.html')
+
+"""
+changelog-
+1. Convert issues page to show only status of books not yet returned.
+"""
+
+
