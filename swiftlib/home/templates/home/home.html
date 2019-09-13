@@ -9,45 +9,31 @@
 
 {% block content %}
     <div class='container'>
-    <div class='header mx-auto'>
-        <h1 class='pageheader-text'> WELCOME, USER </h1>
-    </div>                                                                                                                                         
+        <div class='header mx-auto'>
+            <h1 class='pageheader-text'> WELCOME, USER </h1>
+        </div>                                                                                                                                         
     <div class='search'>
         <form name='searchform' class='mx-auto searchform row input-group' method='POST'>
             <input type='text' id='searchbar' class='form-control' name='search_query' placeholder='looking for something?'>
             <button type='button' id='searchbutton' class='btn input-group-addon'><strong> GO </strong><i class="fas fa-angle-right"></i> </button>
         </form>
     </div>
+
     <div class='results'>
         
     </div>
-    <br>
-    <div class='header mx-auto'>
-        <h2 class='pageheader-text'> QUICK ACTIONS </h2>
-        <br>
-        <div class="row">
-            <div class="col-sm btn-div">
-                <button class='btn qa-button'>
-                    <i class="fas fa-book stdicon qa-button-icon"></i><i class="fas fa-arrow-up stdicon qa-button-icon"></i> Issue Book 
-                </button>
-            </div>
-            <div class="col-sm btn-div">
-                <button class='btn qa-button'>
-                    <i class="fas fa-book stdicon qa-button-icon"></i><i class="fas fa-arrow-down stdicon qa-button-icon"></i> Return Book 
-                    </button>
-            </div>
-            <div class="col-sm btn-div">
-                <button class='btn qa-button'>
-                <i class="fas fa-book stdicon qa-button-icon"></i><i class="fas fa-plus stdicon qa-button-icon"></i> Add Book 
-                </button>
-            </div>
-            <div class="col-sm btn-div">
-                <button class='btn qa-button'>
-                    <i class="fas fa-user-graduate stdicon qa-button-icon"></i><i class="fas fa-plus stdicon qa-button-icon"></i> Add Student 
-                </button>
-            </div>
-        </div>
-    </div>
-    </div>
-{% endblock %}
 
+    <br>
+    <br>
+
+    <div class='header mx-auto'>
+        <h2 class='pageheader-text'> library. fast. </h2>
+        <br><br>
+    </div>
+
+    <h5 class='pageheader-text'>We, here at SwiftLib are determined to make your library management a fun and useful experience.
+    <br>Swiftlib is an application which takes ease and effectivity of library management to a whole new level.
+    <br>sWith this website, a librarian can add students, delete sudents, issue and return books, and much more.
+    </h5>
+
+{% endblock %}
