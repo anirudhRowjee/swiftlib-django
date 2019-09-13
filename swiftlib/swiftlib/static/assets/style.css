@@ -1,3 +1,4 @@
+/*working file!*/
 html {
     height: 100%;
     background-color: #020202;
@@ -95,6 +96,7 @@ body{
     height: 40px;
     background-image: linear-gradient(to right, #39ff19, #bffff1);
     border: none;
+    border-radius: 5px;
 }
 
 #searchbar:focus{
@@ -343,3 +345,24 @@ p {
     color: red;
 }
 
+.issues-selection-bar{
+    background-color: white;
+    font-color: black;
+    padding: 1px;
+    border: 5px solid#39ff19;
+    border-radius: 7px;
+}
+
+.issues-selection-bar p{
+    color: black;
+}
+
+.issues-selection-bar-content{
+    color: #39ff19;
+    padding: 5px;
+}
+
+.searchbar-drop{
+    height: 100%;
+    padding: 9px;
+}

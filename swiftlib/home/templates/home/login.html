@@ -26,6 +26,7 @@
                 <div class='card-body'>
                     <h1 class='card-title'> LOGIN </h1>
                     <form name='loginform' action='#' method='POST'>
+                        {% csrf_token %}
                         <div class='form-group'>
                             <input class='form-control' type='email' name='emailinput' placeholder='email ID'> 
                         </div>
