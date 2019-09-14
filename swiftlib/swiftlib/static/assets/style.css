@@ -366,3 +366,7 @@ p {
     height: 100%;
     padding: 9px;
 }
+
+.issues-select-form{
+    padding: 10px;
+}

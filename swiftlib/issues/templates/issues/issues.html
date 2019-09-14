@@ -15,7 +15,7 @@
                 <!-- selection for search and sort criteria -->
                 <form method='post' class='searchform'>
                     {% csrf_token %}
-                    <div class='form-group searchform input-group'>
+                    <div class='form-group issues-select-form searchform input-group'>
                         <input type='text' id='searchbar' class='form-control' name='search_query' placeholder='Search'>
                         <select name='sort_criteria' placeholder='filter' class='issue-selection-bar-content form-control-sm searchbar-drop my-auto'>
                             <option value='newest'> Most Recent </option>
@@ -23,6 +23,12 @@
                         </select>
                         <button type='button' id='searchbutton' class='btn input-group-addon'><strong> GO </strong><i class="fas fa-angle-right"></i> </button>
                     </div>
+                </form>
             </div>
+            <div class='container'>
+                <!-- display info for issues -->
+
+            </div>
+
         </div>
 {% endblock %}
