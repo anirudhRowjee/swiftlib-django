@@ -12,7 +12,7 @@ from .models import Student
 
 def send_success(request, message):
     context = {
-        'failure_message': message
+        'success_message': message
         }
     return render(request, 'status.html', context)
 
@@ -75,11 +75,9 @@ def addstudent(request):
             return send_failure(request, message)
 
         # package success data
-        context = {
-            'success_message': "Student " + new_student.name + " with ID " + str(new_student.pid) + " successfully created!"
-        }
-        # render the success message page
-        return render(request, 'status.html', context)
+        message = "Student " + new_student.name + " with ID " + str(new_student.pid) + " successfully created!"
+
+        send_success(request, message)
 
     else:
         # user wants to add data / is not reaching before any operation
