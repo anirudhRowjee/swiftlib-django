@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import auth
 
 # Create your views here.
 
@@ -8,23 +9,36 @@ def home(request):
     else:
         return render(request, 'home/home.html')
 
-
-
-
-
-
-def login(request):
+def app_login(request):
     if request.method == 'POST':
-        pass
+        # login 
+        data = request.POST
+        username = data['username']
+        password = data['password']
+
+        user1 = auth.authenticate(request, username=username, password=password)
+
+        if user1 is not None:
+            auth.login(request, user1)
+            return redirect('home')
+
+        elif user1 is None:
+            context = {
+                'error': "User Credentials Invalid"
+                }
+            return render(request, 'home/login.html', context)
     else:
         return render(request, 'home/login.html')
 
 def create_new_user(request):
     pass
 
+def logout_view(request):
+    auth.logout(request)
+    return render(request, 'home/login.html')
+
 """ changelog -
 1. remove quick action buttons
-2. add login and logout facilities (user model)
-3. finish search feature
+2. finish search feature
 """
 
