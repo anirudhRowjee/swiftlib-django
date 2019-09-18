@@ -375,3 +375,8 @@ p {
 .error{
     color: red;
     }
+
+.logout_btn{
+    text-decoration: none;
+    color: white;
+}    

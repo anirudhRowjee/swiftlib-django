@@ -35,7 +35,7 @@ def create_new_user(request):
 
 def logout_view(request):
     auth.logout(request)
-    return render(request, 'home/login.html')
+    return redirect('login')
 
 """ changelog -
 1. remove quick action buttons
