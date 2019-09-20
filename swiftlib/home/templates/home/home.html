@@ -6,48 +6,83 @@
 
 {% block activehome %} active-menu-item {% endblock %}
 
-
 {% block content %}
     <div class='container'>
-    <div class='header mx-auto'>
-        <h1 class='pageheader-text'> WELCOME, {{user.username}} </h1>
-    </div>                                                                                                                                         
-    <div class='search'>
-        <form name='searchform' class='mx-auto searchform row input-group' method='POST'>
-            <input type='text' id='searchbar' class='form-control' name='search_query' placeholder='looking for something?'>
-            <button type='button' id='searchbutton' class='btn input-group-addon'><strong> GO </strong><i class="fas fa-angle-right"></i> </button>
-        </form>
-    </div>
-    <div class='results'>
-        
-    </div>
-    <br>
-    <div class='header mx-auto'>
-        <h2 class='pageheader-text'> QUICK ACTIONS </h2>
+        <div class='header mx-auto'>
+            <h1 class='pageheader-text'> WELCOME, {{user.username}} </h1>
+        </div>                                                                                                                                         
+        <div class='search'>
+            <form name='searchform' class='mx-auto searchform row input-group' method='POST'>
+                <input type='text' id='searchbar' class='form-control' name='search_query' placeholder='looking for something?'>
+                <button type='button' id='searchbutton' class='btn input-group-addon'><strong> GO </strong><i class="fas fa-angle-right"></i> </button>
+            </form>
+        </div>
+        <div class='results'>
+            
+        </div>
         <br>
-        <div class="row">
-            <div class="col-sm btn-div">
-                <button class='btn qa-button'>
-                    <i class="fas fa-book stdicon qa-button-icon"></i><i class="fas fa-arrow-up stdicon qa-button-icon"></i> Issue Book 
-                </button>
-            </div>
-            <div class="col-sm btn-div">
-                <button class='btn qa-button'>
-                    <i class="fas fa-book stdicon qa-button-icon"></i><i class="fas fa-arrow-down stdicon qa-button-icon"></i> Return Book 
+        <div class='header mx-auto'>
+            <h2 class='pageheader-text'> QUICK ACTIONS </h2>
+            <br>
+            <div class="row">
+                <div class="col-sm btn-div">
+                    <button class='btn qa-button'  onclick="javascript{document.getElementById('#common-info-iframe').src = '{% url 'addbook' %}' };">
+                        <i class="fas fa-book stdicon qa-button-icon"></i><i class="fas fa-arrow-up stdicon qa-button-icon"></i> 
+                            Issue Book 
                     </button>
+                </div>
+                <div class="col-sm btn-div">
+                    <button class='btn qa-button'>
+                        <i class="fas fa-book stdicon qa-button-icon"></i><i class="fas fa-arrow-down stdicon qa-button-icon"></i> Return Book 
+                        </button>
+                </div>
+                <div class="col-sm btn-div">
+                    <button class='btn qa-button'>
+                    <i class="fas fa-book stdicon qa-button-icon"></i><i class="fas fa-plus stdicon qa-button-icon"></i> Add Book 
+                    </button>
+                </div>
+                <div class="col-sm btn-div">
+                    <button class='btn qa-button'>
+                        <i class="fas fa-user-graduate stdicon qa-button-icon"></i><i class="fas fa-plus stdicon qa-button-icon"></i> Add Student 
+                    </button>
+                </div>
+                <div class="col-sm btn-div">
+                    <button class='btn qa-button' data-toggle='modal' data-target='#add-librarian'>
+                        <i class="fa fa-lock stdicon qa-button-icon" aria-hidden="true"></i><i class="fas fa-plus stdicon qa-button-icon"></i> Add Librarian 
+                    </button>
+                </div>
             </div>
-            <div class="col-sm btn-div">
-                <button class='btn qa-button'>
-                <i class="fas fa-book stdicon qa-button-icon"></i><i class="fas fa-plus stdicon qa-button-icon"></i> Add Book 
-                </button>
-            </div>
-            <div class="col-sm btn-div">
-                <button class='btn qa-button'>
-                    <i class="fas fa-user-graduate stdicon qa-button-icon"></i><i class="fas fa-plus stdicon qa-button-icon"></i> Add Student 
-                </button>
+            <br>
+            <h2 class='pageheader-text mx-auto'> Librarians </h2>
+            <div class='row'>
+                <br>
+                {% for lib in libs %}
+                <div class='mx-auto header'>
+                    <div class='std-info-mini row mx-auto container'>
+                        <p class='student-name col-sm my-auto'> {{ lib.username }} </p>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
-    </div>
+        <!-- modal -->
+        <div class="modal fade" id="add-librarian" tabindex="-1" role="dialog" aria-labelledby="add-librarian" aria-hidden="true">
+            <div class="modal-dialog s-modal" role="document">
+                <div class="modal-content">
+                    <div class="modal-header s-modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"> Add Librarian</h5>
+                        <button type="button" class="close whiteicon" data-dismiss="modal" aria-label="Close" onclick='window.location.reload();'>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body s-modal-body">
+                        <!-- IFRAME FOR Add Librarian PAGE HERE -->
+                        <iframe class='mx-auto iframe-custom' width='100%' scrolling="no" src="{% url 'add-new-user' %}" style='height:300px;'>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 {% endblock %}
-

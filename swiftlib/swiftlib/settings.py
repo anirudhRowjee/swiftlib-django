@@ -127,3 +127,5 @@ STATIC_ROOT = 'static/'
 STATICFILES_DIRS = [
     'swiftlib/static',
 ]
+
+LOGIN_URL = '/login/'

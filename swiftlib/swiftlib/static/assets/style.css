@@ -181,6 +181,7 @@ body{
 
 .s-modal-body{
     background-color: #020202;
+    height: auto;
 }
 
 .s-modal{
@@ -190,7 +191,7 @@ body{
 
 .iframe-custom{
     border: none;
-    height: 160px;
+    height: 260px;
 }
 
 .customlabel{
@@ -374,9 +375,24 @@ p {
 
 .error{
     color: red;
-    }
+}
 
 .logout_btn{
+    color: red;
+}    
+
+.logout_btn:hover{
     text-decoration: none;
     color: white;
-}    
+text-color:white;
+}
+
+.logout_btn a{
+    text-decoration:none;
+    color:white;
+}
+
+.iframe-cust-lg {
+    border: none;
+    height: 400px;
+}

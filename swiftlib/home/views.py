@@ -1,13 +1,28 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.db.utils import IntegrityError
 
 # Create your views here.
 
+def send_success(request, message):
+    context = {
+        'success_message': message
+        }
+    return render(request, 'status.html', context)
+
+def send_failure(request, message):
+    context = {
+        'failure_message': message
+    }
+    return render(request, 'status.html', context)
+
+
+@login_required
 def home(request):
-    if request.method == 'POST':
-        pass
-    else:
-        return render(request, 'home/home.html')
+    librarians = User.objects.all()
+    return render(request, 'home/home.html', {'libs':librarians})
 
 def app_login(request):
     if request.method == 'POST':
@@ -30,9 +45,30 @@ def app_login(request):
     else:
         return render(request, 'home/login.html')
 
+@login_required
 def create_new_user(request):
-    pass
 
+    if request.method == 'POST':
+        data = request.POST
+        username = data['username']
+        password1 = data['password1']
+        password2 = data['password2']
+
+        if password1 == password2:
+            try:
+                user = User.objects.create(username=username, password=password1)
+            except IntegrityError:
+                return send_failure(request, "User Already Exists!")
+
+            message = "Librarian {username} successfully created!".format(username=user.username)
+            return send_success(request, message)
+        else:
+            message = 'Passwords do not match!'
+            return send_failure(request, message)
+    else:
+        return render(request, 'home/add-user.html')
+
+@login_required
 def logout_view(request):
     auth.logout(request)
     return redirect('login')
