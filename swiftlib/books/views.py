@@ -20,8 +20,11 @@ def home(request):
 def addbook(request):
     return render(request, 'books/add-book-form.html')
 
-def getbookinfo(request, isbn):
-    pass
+def getbookinfo(request):
+    if request.method == 'POST':
+        pass
+    else:
+        return render(request, 'books/book-info-form.html')  
 
 
 

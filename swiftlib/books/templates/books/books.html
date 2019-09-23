@@ -33,37 +33,44 @@
                     </div>
                 </div>
             </div>
+
+
+            {% if not books.all %}
+            <div class='mx-auto header'>
+                
+                <h3 class='whiteicon'> Please Add some books !</h3>
+
+            </div>
+            {% endif %}
+
+            {% for book in books %} 
             <div class='mx-auto header'>
                 <div class='std-info-mini row mx-auto container bookdata-container'>
-                    <p class='student-name col-sm my-auto'  data-toggle="modal" data-target="#book1info"> BOOK 1 <i class="fas fa-id-card-alt stdicon whiteicon"></i> Author 1 </p>
-                    <p class='student-name col-sm my-auto'> ISBN-10 : 123456890 </p>
-                    <p class='student-name col-sm my-auto'> ISBN-13 : 123456890 </p>
-                    <button class='btn student-info-small-button col-sm my-auto'> Issue Book </button>
+                    <p class='student-name col-sm my-auto'  data-toggle="modal" data-target="#book{{book.isbn}}info"> {{book.name}} <i class="fas fa-id-card-alt stdicon whiteicon"></i> {{book.author}} </p>
+                    <p class='student-name col-sm my-auto'> ISBN-13 : {{book.isbn}} </p>
                 </div>
-        </div>
+            </div>
+            {% endfor %}
         <!-- Modal for book info - loops -->
-        <div class="modal fade" id="book1info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {% for book in books %}
+        <div class="modal fade" id="book{{book.isbn}}info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog s-modal" role="document">
                 <div class="modal-content">
                     <div class="modal-header s-modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"> Book <> Author </h5>
+                        <h5 class="modal-title" id="exampleModalLabel"> Book Information </h5>
                         <button type="button" class="close whiteicon" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body s-modal-body">
-                        <!-- IFRAME FOR book INFO PAGE HERE -->
-                        <p class='whiteicon'> Name : </p>
-                        <p class='whiteicon'> Author : </p>
-                        <p class='whiteicon'> Genre : </p>
-                        <p class='whiteicon'> ISBN-10 : </p>
-                        <p class='whiteicon'> ISBN-13 : </p>
-                        <p class='whiteicon'> Currently Borrowed by : </p>
-                        <button class='btn btn-danger'> Delete Book </button>
+                        <!-- IFRAME FOR BOOK INFO PAGE HERE -->
+                        <iframe class='mx-auto iframe-custom' width='100%' scrolling="no" src="{% url 'bookinfo' isbn=book.isbn %}">
+                        </iframe>
                     </div>
                 </div>
             </div>
         </div>
+        {% endfor %}
 
         <!-- Modal to add book -->
         <div class="modal fade" id="addbookmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -77,45 +84,43 @@
                     </div>
                     <div class="modal-body s-modal-body">
                         <iframe class='mx-auto iframe-custom add-book-form'  scrolling="no" src="{% url 'addbook' %}" >
-                    </iframe>
-                    
+                        </iframe>
                     </div>
-
                 </div>
             </div>
         </div>
         <!-- Modal to issue book -->
         <div class="modal fade" id="issuebookmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="modal-dialog s-modal" role="document">
-             <div class="modal-content">
-                 <div class="modal-header s-modal-header">
-                     <h5 class="modal-title" id="exampleModalLabel">Issue book</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
-                     <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body s-modal-body">
-                    <iframe class='mx-auto iframe-custom issues-add-form'  scrolling="no" src="{% url 'issuebook' %}" >
-                    </iframe>
+             <div class="modal-dialog s-modal" role="document">
+                 <div class="modal-content">
+                     <div class="modal-header s-modal-header">
+                         <h5 class="modal-title" id="exampleModalLabel">Issue book</h5>
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                         <span aria-hidden="true">&times;</span>
+                         </button>
+                     </div>
+                     <div class="modal-body s-modal-body">
+                        <iframe class='mx-auto iframe-custom issues-add-form'  scrolling="no" src="{% url 'issuebook' %}" >
+                        </iframe>
+                     </div>
                  </div>
              </div>
-         </div>
-     </div>
+        </div>
         <!-- Modal to return book -->
         <div class="modal fade" id="returnbookmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-         <div class="modal-dialog s-modal" role="document">
-             <div class="modal-content">
-                 <div class="modal-header s-modal-header">
-                     <h5 class="modal-title" id="exampleModalLabel">Return book</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
-                     <span aria-hidden="true">&times;</span>
-                     </button>
-                 </div>
-                 <div class="modal-body s-modal-body">
-                    <iframe class='mx-auto iframe-custom issues-return-form'  scrolling="no" src="{% url 'returnbook'%}" >
-                    </iframe>
+             <div class="modal-dialog s-modal" role="document">
+                 <div class="modal-content">
+                     <div class="modal-header s-modal-header">
+                         <h5 class="modal-title" id="exampleModalLabel">Return book</h5>
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                         <span aria-hidden="true">&times;</span>
+                         </button>
+                     </div>
+                     <div class="modal-body s-modal-body">
+                        <iframe class='mx-auto iframe-custom issues-return-form'  scrolling="no" src="{% url 'returnbook'%}" >
+                        </iframe>
+                     </div>
                  </div>
              </div>
          </div>
-     </div>
 {% endblock %}
