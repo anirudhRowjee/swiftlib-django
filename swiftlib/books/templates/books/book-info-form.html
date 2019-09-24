@@ -4,14 +4,13 @@
 <script src="https://kit.fontawesome.com/da8d57c989.js"></script>
 <link rel="stylesheet" href="{% static 'assets/style.css' %}">
 
-
-<p class='whiteicon'> Name : </p>
-<p class='whiteicon'> Author : </p>
-<p class='whiteicon'> Genre : </p>
-<p class='whiteicon'> ISBN-10 : </p>
-<p class='whiteicon'> ISBN-13 : </p>
-<p class='whiteicon'> Currently Borrowed by : </p>
+<strong class='whiteicon'> Name : </p><span class='info-field'></span> {{ book.name }} </span>
+<strong class='whiteicon'> Author : </p><span class='info-field'></span> {{ book.author }} </span>
+<strong class='whiteicon'> ISBN-13 : </p><span class='info-field'></span> {{ book.isbn13 }} </span>
 <button class='btn btn-danger'> Delete Book </button>
+<form method='POST' action='submit'>
+        {% csrf_token %}
+        <input type='hidden' value='{{ book.pid }}' name='delete_isbn'>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
