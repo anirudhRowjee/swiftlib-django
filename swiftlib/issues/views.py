@@ -66,34 +66,34 @@ def home(request):
 
 
 def issuebook(request):
-        if request.method == 'POST':
+    if request.method == 'POST':
 
-            data = request.POST
+        data = request.POST
 
-            student_pid = str(data['student-pid'])
-            book_isbn = str(data['book-isbn'])
+        student_pid = str(data['student-pid'])
+        book_isbn = str(data['book-isbn'])
 
-            student_issue = students.Student.objects.get(pid=student_pid)
-            book_issue = books.Book.objects.get(isbn13=book_isbn)
+        student_issue = students.Student.objects.get(pid=student_pid)
+        book_issue = books.Book.objects.get(isbn13=book_isbn)
 
-            new_book = issues.Issue(
-                user_issued = student_issue,
-                book_issued = book_issue,
-            )
+        new_book = issues.Issue(
+            user_issued = student_issue,
+            book_issued = book_issue,
+        )
 
-            try:
-                new_book.save()
+        try:
+            new_book.save()
 
-            except IntegrityError:
-                message = 'Book has already been issued'
-                return send_failure(request, message)
+        except IntegrityError:
+            message = 'Book has already been issued'
+            return send_failure(request, message)
 
-            message = "Book "+ str(new_book.book_issued) + " has been successfully Issued! "
+        message = "Book "+ str(new_book.book_issued) + " has been successfully Issued! "
 
-            return send_success(request, message)
+        return send_success(request, message)
 
-        else:
-            return render(request, 'issues/issues-add-form.html')
+    else:
+        return render(request, 'issues/issues-add-form.html')
 
 def returnbook(request):
     if request.method == 'POST':
@@ -116,6 +116,16 @@ def returnbook(request):
         try:
             return_book.date_returned = now
             return_book.save()
+
+        except:
+            message = 'Book could not be returned'
+            return send_failure(request,message)
+            message = "Book "+ str(return_book.book_issued) + " has been successfully Returned! "
+            return send_success(request, message)
+    else:
+        return render(request, 'issues/issues-return-form.html')
+
+
 
 def issueinfo(request):
     pass
