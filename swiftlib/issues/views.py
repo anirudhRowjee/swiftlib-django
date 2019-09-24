@@ -1,37 +1,54 @@
 from django.shortcuts import render
 from . import models as issues
-from books import models as books
-from students import models as students
-
 
 def home(request):
 
     if request.method == 'POST':
+
         data = request.POST
         search_query = data['search_query']
         search_criteria = data['search_criteria']
 
-        # search by book name, date or user
-        if search_criteria == 'date_issued':
-
-            search_query = search_query.replace('/', '-')
-            issues_search = issues.Issue.objects.filter(date_issued=search_query)
+        if search_criteria == 'book_isbn':
+            # search for similar ISBN of book issued
+            isbn = int(search_query)
+            results = issues.Issue.objects.filter(book_issued__isbn13=isbn)
             context = {
-                'results' : issues_search,
+                'results': results,
+                'has_results': True,
             }
             return render(request, 'issues/issues.html', context)
 
-        elif search_criteria == 'book_issued':
-            # match the book parameters
-            pass
-        elif search_criteria == 'student_issued':
-            # match student issued to
-            pass
+        if search_criteria == 'book_name':
+            # search for similar name of book issued
+            name = str(search_query)
+            results = issues.Issue.objects.filter(book_issued__name__icontains=name)
+            context = {
+                'results': results,
+                'has_results': True,
+            }
+            return render(request, 'issues/issues.html', context)
 
-
-
+        if search_criteria == 'student_name':
+            # search for similar name of student to whom book is issued
+            name = str(search_query)
+            results = issues.Issue.objects.filter(user_issued__name__icontains=name)
+            context = {
+                'results': results,
+                'has_results': True,
+            }
+            return render(request, 'issues/issues.html', context)
     else:
-        return render(request, 'issues/issues.html')
+
+        # default - show latest 5 issued books
+        default = issues.Issue.objects.order_by('-date_issued')[:5][::-1]
+        context = {
+            'has_results': False,
+            'default': default,
+        }
+        return render(request, 'issues/issues.html', context)
+
+
 
 def issuebook(request):
     return render(request, 'issues/issues-add-form.html')
@@ -39,8 +56,5 @@ def issuebook(request):
 def returnbook(request):
     return render(request, 'issues/issues-return-form.html')
 
-def bookinfo(request):
+def issueinfo(request):
     return render(request, 'issues/issues-info-form.html')
-
-
-
