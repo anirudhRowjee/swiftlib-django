@@ -11,16 +11,17 @@
         <div class='mx-auto'>
             <!-- show all books pending to be returned -->
             <h3 class='pageheader-text'> Select Criteria -  </h3>
+
             <div class=' mx-auto' id='issues-bar'>
                 <!-- selection for search and sort criteria -->
-
                 <form method='post' class='searchform'>
                     {% csrf_token %}
                     <div class='form-group issues-select-form searchform input-group'>
-                        <input type='text' id='searchbar' class='form-control' name='search_query' placeholder='Search'>
-                        <select name='sort_criteria' placeholder='filter' class='issue-selection-bar-content form-control-sm searchbar-drop my-auto'>
-                            <option value='newest'> Most Recent </option>
-                            <option value='oldest'> Least Recent </option>
+                        <input type='text' id='searchbar' class='form-control' name='search_query' placeholder='Search in Issues'>
+                        <select name='search_criteria' placeholder='search by' class='issue-selection-bar-content form-control-sm searchbar-drop my-auto'>
+                            <option value='date_issued'> Date of Issue (YYYY/MM/DD) </option>
+                            <option value='book_issued'> name of Book Issued </option>
+                            <option value='student_issued'> Borrowed By (name of student) </option>
                         </select>
                         <button type='button' id='searchbutton' class='btn input-group-addon'><strong> GO </strong><i class="fas fa-angle-right"></i> </button>
                     </div>
