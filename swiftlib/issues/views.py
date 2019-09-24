@@ -3,6 +3,17 @@ from . import models as issues
 from books import models as books
 from students import models as students
 
+def send_success(request, message):
+    context = {
+        'success_message': message
+        }
+    return render(request, 'status.html', context)
+
+def send_failure(request, message):
+    context = {
+        'failure_message': message
+        }
+    return render(request, 'status.html', context)
 
 def home(request):
 
@@ -34,9 +45,34 @@ def home(request):
         return render(request, 'issues/issues.html')
 
 def issuebook(request):
-    return render(request, 'issues/issues-add-form.html')
+        if request.method == 'POST':
+    
+            data = request.POST
+
+            user_issued = str(data.get('user_issued'))
+            book_issued = str(data.get('book_issued'))
+
+            new_book = Book(
+                user_issued = user_issued,
+                book_issued = book_issued,
+            )
+            
+            try:
+                new_book.save()
+
+            except IntegrityError:
+                message = 'Book has already been issued'
+                return send_failure(request, message)
+        
+            message = "Book "+ new_book.book_issued + " has been successfully Issued! "
+            
+            return send_success(request, message)
+
+        else:
+            return render(request, 'issues/issues-add-form.html')
 
 def returnbook(request):
+    '''http://dev.splunk.com/view/webframework-djangobindings/SP-CAAAEM5'''
     return render(request, 'issues/issues-return-form.html')
 
 def bookinfo(request):

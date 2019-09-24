@@ -4,8 +4,8 @@
 <script src="https://kit.fontawesome.com/da8d57c989.js"></script>
 <link rel="stylesheet" href="{% static 'assets/style.css' %}">
 
-<form method='POST' url='#' id='issues-add-form'>
-    {%csrf_token%}
+<form method='POST' url='#' id='add-book-form'>
+    {% csrf_token %}
     <div class='form-group custom-formgroup'>
         <label class='customlabel' for='name'> Book Name </label>
         <input type='text' class='form-control custom-input' name='name' placeholder='Name of Book'>
