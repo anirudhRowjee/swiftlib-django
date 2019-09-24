@@ -66,15 +66,14 @@ def addbook(request):
         # user wants to add data / is not reaching before any operation
         return render(request, 'books/add-book-form.html')
 
-def getbookinfo(request, isbn):
+def getbookinfo(request, isbn13):
     if request.method == 'POST':
 
         data = request.POST
-
         isbn13 = data['delete-isbn']
 
         try:
-            book_to_be_deleted = Book.objects.get(isbn13=isbn)
+            book_to_be_deleted = Book.objects.get(isbn13=isbn13)
 
         except ObjectDoesNotExist:
             context = {
@@ -85,7 +84,7 @@ def getbookinfo(request, isbn):
         book_to_be_deleted.delete()
 
         context = {
-            'success_message': "Book " + int(isbn13) + " has been successfully deleted! "
+            'success_message': "Book " + str(isbn13) + " has been successfully deleted! "
         }
 
         return render(request, 'status.html', context)
@@ -93,14 +92,15 @@ def getbookinfo(request, isbn):
     else:
 
         try:
-            books = Book.objects.get(pid=pid)
+            books = Book.objects.get(isbn13=isbn13)
             context = {
-                'books': books,
+                'book': books,
             }
             return render(request,'books/book-info-form.html', context)
 
         except ObjectDoesNotExist:
-            pass
+            message = 'Book does not exist'
+            return send_failure(request, message)
             
     context = {
                 'failure_message': 'Book does not exist!'
