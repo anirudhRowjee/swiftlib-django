@@ -4,19 +4,20 @@
 <script src="https://kit.fontawesome.com/da8d57c989.js"></script>
 <link rel="stylesheet" href="{% static 'assets/style.css' %}">
 
-<form action='submit' url='#' id='issues-add-form'>
+<form method='POST' url='#' id='issues-add-form'>
+    {%csrf_token%}
     <div class='form-group custom-formgroup'>
-        <label class='customlabel' for='student-pid'> Book Name </label>
-        <input type='text' class='form-control custom-input' name='student-pid' placeholder='Name of Book'>
+        <label class='customlabel' for='name'> Book Name </label>
+        <input type='text' class='form-control custom-input' name='name' placeholder='Name of Book'>
     </div>
     <div class='form-group custom-formgroup'>
-        <label class='customlabel' for='book-isbn'> Book ISBN / ID </label>
-        <input type='text' class='form-control custom-input' name='book-isbn' placeholder='ISBN of Book'>
+        <label class='customlabel' for='isbn13'> Book ISBN / ID </label>
+        <input type='text' class='form-control custom-input' name='isbn13' placeholder='ISBN of Book'>
     </div>
 
     <div class='form-group custom-formgroup'>
-        <label class='customlabel' for='book-isbn'> Author name </label>
-        <input type='text' class='form-control custom-input' name='author-isbn' placeholder='Name of Author'>
+        <label class='customlabel' for='author'> Author name </label>
+        <input type='text' class='form-control custom-input' name='author' placeholder='Name of Author'>
     </div>
 
     <button class='btn btn-primary custom-submit-button' action='submit'>Add Book </button>

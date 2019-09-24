@@ -46,14 +46,14 @@
             {% for book in books %} 
             <div class='mx-auto header'>
                 <div class='std-info-mini row mx-auto container bookdata-container'>
-                    <p class='student-name col-sm my-auto'  data-toggle="modal" data-target="#book{{book.isbn}}info"> {{book.name}} <i class="fas fa-id-card-alt stdicon whiteicon"></i> {{book.author}} </p>
-                    <p class='student-name col-sm my-auto'> ISBN-13 : {{book.isbn}} </p>
+                    <p class='student-name col-sm my-auto'  data-toggle="modal" data-target="#book{{book.isbn13}}info"> {{book.name}} <i class="fas fa-id-card-alt stdicon whiteicon"></i> {{book.author}} </p>
+                    <p class='student-name col-sm my-auto'> ISBN-13 : {{book.isbn13}} </p>
                 </div>
             </div>
             {% endfor %}
         <!-- Modal for book info - loops -->
         {% for book in books %}
-        <div class="modal fade" id="book{{book.isbn}}info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="book{{book.isbn13}}info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog s-modal" role="document">
                 <div class="modal-content">
                     <div class="modal-header s-modal-header">
@@ -64,7 +64,7 @@
                     </div>
                     <div class="modal-body s-modal-body">
                         <!-- IFRAME FOR BOOK INFO PAGE HERE -->
-                        <iframe class='mx-auto iframe-custom' width='100%' scrolling="no" src="{% url 'bookinfo' isbn=book.isbn %}">
+                        <iframe class='mx-auto iframe-custom' width='100%' scrolling="no" src="{% url 'bookinfo' isbn13=book.isbn13 %}">
                         </iframe>
                     </div>
                 </div>
