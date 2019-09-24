@@ -3,7 +3,8 @@
 <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/da8d57c989.js"></script>
 <link rel="stylesheet" href="{% static 'assets/style.css' %}">
-<form action='submit' url='#' id='issues-add-form'>
+<form method='POST' url='#' id='issues-add-form'>
+    {% csrf_token %}
     <div class='form-group custom-formgroup'>
         <label class='customlabel' for='student-pid'> Student ID </label>
         <input type='text' class='form-control custom-input' name='student-pid' placeholder='Student ID (unique)'>

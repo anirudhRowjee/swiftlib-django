@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from django.db import IntegrityError
 from . import models as issues
 from books import models as books
 from students import models as students
+from datetime import datetime
 
 def send_success(request, message):
     context = {
@@ -49,12 +51,15 @@ def issuebook(request):
     
             data = request.POST
 
-            user_issued = str(data.get('user_issued'))
-            book_issued = str(data.get('book_issued'))
+            student_pid = str(data['student-pid'])
+            book_isbn = str(data['book-isbn'])
+            
+            student_issue = students.Student.objects.get(pid=student_pid)
+            book_issue = books.Book.objects.get(isbn13=book_isbn)
 
-            new_book = Book(
-                user_issued = user_issued,
-                book_issued = book_issued,
+            new_book = issues.Issue(
+                user_issued = student_issue,
+                book_issued = book_issue,
             )
             
             try:
@@ -64,7 +69,7 @@ def issuebook(request):
                 message = 'Book has already been issued'
                 return send_failure(request, message)
         
-            message = "Book "+ new_book.book_issued + " has been successfully Issued! "
+            message = "Book "+ str(new_book.book_issued) + " has been successfully Issued! "
             
             return send_success(request, message)
 
@@ -72,11 +77,38 @@ def issuebook(request):
             return render(request, 'issues/issues-add-form.html')
 
 def returnbook(request):
-    '''http://dev.splunk.com/view/webframework-djangobindings/SP-CAAAEM5'''
-    return render(request, 'issues/issues-return-form.html')
+    if request.method == 'POST':
 
-def bookinfo(request):
-    return render(request, 'issues/issues-info-form.html')
+        now = datetime.today().strftime('%Y-%m-%d')
 
+        data = request.POST
 
+        student_pid = str(data['student-pid'])
+        book_isbn = str(data['book-isbn'])
+            
+        student_issue = students.Student.objects.get(pid=student_pid)
+        book_issue = books.Book.objects.get(isbn13=book_isbn)
 
+        return_book = issues.Issue.objects.get(
+            user_issued = student_issue,
+            book_issued = book_issue
+            )
+            
+        try:
+            return_book.date_returned = now  
+            return_book.save() 
+
+        except:
+            message = 'Book could not be returned'
+            return send_failure(request,message)
+        
+        message = "Book "+ str(return_book.book_issued) + " has been successfully Returned! "
+            
+        return send_success(request, message)  
+
+    else: 
+
+        return render(request, 'issues/issues-return-form.html')
+
+def issueinfo(request):
+    pass
