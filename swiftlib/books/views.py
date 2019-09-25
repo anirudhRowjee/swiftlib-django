@@ -1,6 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
 
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from .models import Book
@@ -19,6 +20,7 @@ def send_failure(request, message):
 
 # Create your views here.
 
+@login_required
 def home(request):
     if request.method == "POST" :
         pass
@@ -29,6 +31,7 @@ def home(request):
         }
     return render(request, 'books/books.html',context)
 
+@login_required
 def addbook(request):
     if request.method == 'POST':
 
@@ -46,7 +49,7 @@ def addbook(request):
             isbn13=isbn13,
             author=author
         )
-        
+
         # save the new object
         try:
             new_book.save()
@@ -66,6 +69,7 @@ def addbook(request):
         # user wants to add data / is not reaching before any operation
         return render(request, 'books/add-book-form.html')
 
+@login_required
 def getbookinfo(request, isbn13):
     if request.method == 'POST':
 
@@ -100,8 +104,8 @@ def getbookinfo(request, isbn13):
 
         except ObjectDoesNotExist:
             message = 'Book does not exist'
-            return send_failure(request, message)
-            
+        return send_failure(request, message)
+
     context = {
                 'failure_message': 'Book does not exist!'
             }

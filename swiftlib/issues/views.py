@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.db import IntegrityError
-
+from datetime import datetime
 from . import models as issues
 from books import models as books
 from students import models as students
+from django.contrib.auth.decorators import login_required
 
 def send_success(request, message):
     context = {
@@ -17,6 +18,7 @@ def send_failure(request, message):
         }
     return render(request, 'status.html', context)
 
+@login_required
 def home(request):
 
     if request.method == 'POST':
@@ -28,7 +30,7 @@ def home(request):
         if search_criteria == 'book_isbn':
             # search for similar ISBN of book issued
             isbn = int(search_query)
-            results = issues.Issue.objects.filter(book_issued__isbn13=isbn)
+            results = issues.Issue.objects.filter(book_issued__isbn13=isbn).filter(date_returned=None)
             context = {
                 'results': results,
                 'has_results': True,
@@ -65,6 +67,7 @@ def home(request):
         return render(request, 'issues/issues.html', context)
 
 
+@login_required
 def issuebook(request):
     if request.method == 'POST':
 
@@ -95,6 +98,7 @@ def issuebook(request):
     else:
         return render(request, 'issues/issues-add-form.html')
 
+@login_required
 def returnbook(request):
     if request.method == 'POST':
 
@@ -120,12 +124,13 @@ def returnbook(request):
         except:
             message = 'Book could not be returned'
             return send_failure(request,message)
-            message = "Book "+ str(return_book.book_issued) + " has been successfully Returned! "
-            return send_success(request, message)
+        message = "Book "+ str(return_book.book_issued) + " has been successfully Returned! "
+        return send_success(request, message)
     else:
         return render(request, 'issues/issues-return-form.html')
 
 
 
+@login_required
 def issueinfo(request):
     pass

@@ -10,12 +10,8 @@ class Book(models.Model):
     isbn13 = models.CharField(max_length=13, blank=True)
 
     # book pretty name
-    def pretty(self):
-        authors = self.authors
-        namestring = ''
-        for author in authors:
-            namestring += author.name + ' , '
-        return self.name +' by ' + namestring
+    def __str__(self):
+        return self.name +' by ' + self.author
 
 
 

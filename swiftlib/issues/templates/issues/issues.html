@@ -32,8 +32,10 @@
         <div class='mx-auto' name='results'>
             <h4 class='pageheader-text mx-auto'> Search Results </h4>
             {% for result in results %}
-            <p> Result  {{ result.name }} </p>
+            <p class='whiteicon'> {{ result}} </p>
             {% endfor %}
         </div>
+        {% else %}
+        <h4 class='pageheader-text'> Sorry, we did not find any results :( </h4>
         {% endif %}
 {% endblock %}

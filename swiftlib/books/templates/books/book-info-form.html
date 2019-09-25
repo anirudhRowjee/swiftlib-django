@@ -4,16 +4,16 @@
 <script src="https://kit.fontawesome.com/da8d57c989.js"></script>
 <link rel="stylesheet" href="{% static 'assets/style.css' %}">
 
-<strong > Name : </p><span class='info-field'></span> {{ book.name }} </strong>
+<strong  class='whiteicon'> Name : {{ book.name }} </strong>
 <br>
-<strong > Author : </p><span class='info-field'></span> {{ book.author }} </strong>
+<strong class='whiteicon' > Author : {{ book.author }} </strong>
 <br>
-<strong > ISBN-13 : </p><span class='info-field'></span> {{ book.isbn13 }} </strong>
+<strong class='whiteicon' > ISBN-13 : {{ book.isbn13 }} </strong>
 <br>
-<button class='btn btn-danger'> Delete Book </button>
-<form method='POST' action='submit'>
+<form method='POST' url='#'>
         {% csrf_token %}
-        <input type='hidden' value='{{ book.pid }}' name='delete_isbn'>
+        <input type='hidden' value='{{ book.isbn13 }}' name='delete-isbn'>
+        <button class='btn btn-danger' action='submit'> Delete Book </button>
 </form>        
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
