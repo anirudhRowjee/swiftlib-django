@@ -18,11 +18,13 @@
                     {% csrf_token %}
                     <div class='form-group issues-select-form searchform input-group'>
                         <input type='text' id='searchbar' class='form-control' name='search_query' placeholder='Search in Issues'>
+                        <div class='searchoptions'>
                         <select name='search_criteria' title='search_criteria' placeholder='search by' class='issue-selection-bar-content form-control-sm searchbar-drop my-auto'>
                             <option value='book_isbn'> ISBN of Book Issued </option>
                             <option value='book_name'> Name of Book Issued </option>
                             <option value='student_name'> Borrowed By (name of student) </option>
                         </select>
+                        </div>
                         <button type='submit' id='searchbutton' onclick='submit' class='btn input-group-addon'><strong> GO </strong><i class="fas fa-angle-right"></i> </button>
                     </div>
                 </form>
@@ -32,10 +34,18 @@
         <div class='mx-auto' name='results'>
             <h4 class='pageheader-text mx-auto'> Search Results </h4>
             {% for result in results %}
-            <p class='whiteicon'> {{ result}} </p>
+                <div class='std-info-mini row mx-auto container'>
+                    <p class='student-name col-sm my-auto'> {{ result }} </p>
+                </div>
             {% endfor %}
         </div>
         {% else %}
-        <h4 class='pageheader-text'> Sorry, we did not find any results :( </h4>
+            {% for issue in default %}
+                <div class='std-info-mini row mx-auto container'>
+                    <p class='student-name col-sm my-auto'> {{ issue }} </p>
+                </div>
+            {% empty %}
+                <p class='pageheader-text'> NO ISSUES! </p>
+            {% endfor %}
         {% endif %}
 {% endblock %}

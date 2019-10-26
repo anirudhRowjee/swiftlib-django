@@ -1,4 +1,4 @@
-/* non-working file */
+/*working file!*/
 html {
     height: 100%;
     background-color: #020202;
@@ -41,6 +41,8 @@ body{
     color: white;
     position: sticky;
     padding: none;
+    border-radius: 9px;
+    margin: 5px;
 }
 
 #logo-text{
@@ -58,7 +60,7 @@ body{
 
 .active-menu-item{
     border: none;
-    border-bottom: 1px solid #3caa2b;
+    border-bottom: 1px solid #F34213;
 }
 
 .nav-pill{
@@ -96,6 +98,7 @@ body{
     height: 40px;
     background-image: linear-gradient(to right, #39ff19, #bffff1);
     border: none;
+    border-radius: 5px;
 }
 
 #searchbar:focus{
@@ -180,6 +183,7 @@ body{
 
 .s-modal-body{
     background-color: #020202;
+    height: auto;
 }
 
 .s-modal{
@@ -189,7 +193,7 @@ body{
 
 .iframe-custom{
     border: none;
-    height: 160px;
+    height: 260px;
 }
 
 .customlabel{
@@ -316,28 +320,81 @@ p {
   }
 }
 
-.info-container{
-    display: flex;
-    flex-direction: column;
+.infotext{
+    color: white;
+    padding: 0px;
+    font-size: 20px;
 }
 
-.infotext{
-    font-color: white;
-    padding: 0px;
-    font-size: 3%;
+.info-fieldname{
+    font-style: bold;
+    color: #3caa2b;
+}
+
+.info-field{
+    float: right;
 }
 
 .notifier{
-    font-size: 3%;
+    color: white;
+    padding: 1px;
+}
+
+.success{
+    color: green;
+}
+
+.error{
+    color: red;
 }
 
 .issues-selection-bar{
     background-color: white;
+    font-color: black;
+    padding: 1px;
+    border: 5px solid#39ff19;
+    border-radius: 7px;
+}
+
+.issues-selection-bar p{
     color: black;
 }
 
+.issues-selection-bar-content{
+    color: #39ff19;
+    padding: 5px;
+}
 
-#issues-bar{
-    background-color: white;
-    color: black;
+.searchbar-drop{
+    height: 100%;
+    padding: 9px;
+}
+
+.issues-select-form{
+    padding: 10px;
+}
+
+
+.error{
+    color: red;
+}
+
+.logout_btn{
+    color: red;
+}    
+
+.logout_btn:hover{
+    text-decoration: none;
+    color: white;
+text-color:white;
+}
+
+.logout_btn a{
+    text-decoration:none;
+    color:white;
+}
+
+.iframe-cust-lg {
+    border: none;
+    height: 400px;
 }

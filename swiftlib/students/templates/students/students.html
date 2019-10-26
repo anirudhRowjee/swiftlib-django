@@ -39,8 +39,7 @@
             <div class='mx-auto header'>
                 <div class='std-info-mini row mx-auto container'>
                     <p class='student-name col-sm my-auto'  data-toggle="modal" data-target="#{{student.pid}}info"> {{ student.name}} <i class="fas fa-id-card-alt stdicon whiteicon"></i> {{ student.pid }} </p>
-                    <p class='student-name col-sm my-auto'> {{ student.book_issued }} </p>
-                    <button class='btn student-info-small-button col-sm my-auto'> Issue Book </button>
+                    <p class='student-name col-sm my-auto'> Borrowed - {{ student.book_issued }} </p>
                 </div>
             </div>
             {% endfor %}

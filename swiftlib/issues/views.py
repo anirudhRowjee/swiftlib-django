@@ -59,7 +59,7 @@ def home(request):
     else:
 
         # default - show latest 5 issued books
-        default = issues.Issue.objects.order_by('-date_issued')[:5][::-1]
+        default = issues.Issue.objects.order_by('-date_issued')
         context = {
             'has_results': False,
             'default': default,
@@ -72,26 +72,26 @@ def issuebook(request):
     if request.method == 'POST':
 
         data = request.POST
-
         student_pid = str(data['student-pid'])
         book_isbn = str(data['book-isbn'])
 
-        student_issue = students.Student.objects.get(pid=student_pid)
-        book_issue = books.Book.objects.get(isbn13=book_isbn)
+        student_to_issue_to = students.Student.objects.get(pid=student_pid)
+        book_to_issue = books.Book.objects.get(isbn13=book_isbn)
 
-        new_book = issues.Issue(
-            user_issued = student_issue,
-            book_issued = book_issue,
+        new_issue = issues.Issue(
+            user_issued = student_to_issue_to,
+            book_issued = book_to_issue,
         )
 
         try:
-            new_book.save()
+            new_issue.save()
+            student_to_issue_to.book_issued = book_to_issue
 
         except IntegrityError:
             message = 'Book has already been issued'
             return send_failure(request, message)
 
-        message = "Book "+ str(new_book.book_issued) + " has been successfully Issued! "
+        message = "Book "+ str(new_issue.book_issued) + " has been successfully Issued! "
 
         return send_success(request, message)
 
@@ -133,4 +133,8 @@ def returnbook(request):
 
 @login_required
 def issueinfo(request):
-    pass
+    if request.method == 'GET':
+        #TODO - Add this method and set up modals for search results
+        pass
+    else:
+        pass

@@ -9,11 +9,11 @@
 {% block content %}
     <div class='container'>
         <div class='header mx-auto'>
-            <h1 class='pageheader-text'> WELCOME, {{user.username}} </h1>
+            <h1 class='pageheader-text'> WELCOME, {{user.username | upper}} </h1>
         </div>                                                                                                                                         
         <br>
         <div class='header mx-auto'>
-            <h2 class='pageheader-text mx-auto'> CURRENT LIBRARIANS </h2>
+            <h3 class='pageheader-text mx-auto'> CURRENT LIBRARIANS </h3>
             <div class="row">
                 <div class="col-sm btn-div">
                     <button class='btn qa-button' data-toggle='modal' data-target='#add-librarian'>
@@ -22,14 +22,14 @@
                 </div>
             </div>
             <br>
-            <div class='row'>
+            <div class='column'>
                 <br>
                 {% for lib in libs %}
-                <div class='mx-auto header'>
-                    <div class='std-info-mini row mx-auto container'>
-                        <p class='student-name col-sm my-auto'> {{ lib.username }} </p>
+                    <div class='mx-auto header row'>
+                        <div class='std-info-mini row mx-auto container bookdata-container'>
+                            <p class='student-name col-sm my-auto'> {{lib.username }}</p>
+                        </div>
                     </div>
-                </div>
                 {% endfor %}
             </div>
         </div>

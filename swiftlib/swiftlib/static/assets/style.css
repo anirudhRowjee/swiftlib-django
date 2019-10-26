@@ -41,6 +41,8 @@ body{
     color: white;
     position: sticky;
     padding: none;
+    border-radius: 9px;
+    margin: 5px;
 }
 
 #logo-text{
@@ -58,8 +60,9 @@ body{
 
 .active-menu-item{
     border: none;
-    border-bottom: 1px solid #3caa2b;
+    border-bottom: 1px solid #6fffe9;
 }
+
 
 .nav-pill{
     padding: none;
@@ -85,7 +88,7 @@ body{
 }
 
 .pageheader-text{
-    color: #bffff1;
+    color: #6FFFE9;
 }
 
 .search{
@@ -94,9 +97,9 @@ body{
 
 #searchbar{
     height: 40px;
-    background-image: linear-gradient(to right, #39ff19, #bffff1);
-    border: none;
+    border: 1px solid #FCFCFC;
     border-radius: 5px;
+    background-color:transparent;
 }
 
 #searchbar:focus{
@@ -105,9 +108,9 @@ body{
 }
 
 #searchbutton{
-    border-top-left-radius: 0px;
-    border-bottom-left-radius: 0px;
-    background-color: #bffff1;
+    background-color: transparent;
+    color: #6FFFE9;
+    border: 1px solid #FCFCFC;
     font-family: 'IBM Plex Sans';
 }
 
@@ -116,7 +119,7 @@ body{
 }
 
 .qa-button{
-    background-image: linear-gradient(to right, #39ff19, #bffff1);
+    background-color: #FCFCFC;
     width: 100%;
     color: #020202;
     padding: 10px;
@@ -139,16 +142,15 @@ body{
 .student-name{
     font-family: 'IBM Plex Sans';
     padding: 2px;
-    color: #bffff1;
+    color: #C1CFDA;
     padding: 5px;
 }
 
 .std-info-mini{
     margin-left: auto;
     width: 100%;
-    border: 3px solid;
-    border-image-source: linear-gradient(to right,#39ff19, #bffff1);
-    border-image-slice: 2%;
+    border: 1px solid #6FFFE9;
+    border-radius: 2px;
     padding: 2%;
 }
 
@@ -175,7 +177,7 @@ body{
 
 .s-modal-header{
     background-color: #020202;
-    color: #bffff1;
+    color:  #6FFFE9;
     border-bottom: none;
 }
 
@@ -185,13 +187,13 @@ body{
 }
 
 .s-modal{
-    border: 5px solid#39ff19;
-    border-radius: 7px;
+    border: 1px solid #6FFFE9;
+    border-radius: 5px;
 }
 
 .iframe-custom{
     border: none;
-    height: 260px;
+    height: auto;
 }
 
 .customlabel{
@@ -366,6 +368,18 @@ p {
 .searchbar-drop{
     height: 100%;
     padding: 9px;
+    background-color: transparent;
+    color: #FCFCFC;
+    border: 1px solid #FCFCFC;
+}
+
+.searchbar-drop :active :focus{
+    outline: none;
+}
+
+.searchbar-drop option {
+    background-color: #000000;
+    padding: 5px;
 }
 
 .issues-select-form{

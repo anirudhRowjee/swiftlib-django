@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from .models import Book
+from .libs import getBookData
 
 def send_success(request, message):
     context = {
@@ -43,12 +44,24 @@ def addbook(request):
         isbn13 = str(data.get('isbn13'))
         author=str(data.get('author'))
 
-        # package a new Student object
-        new_book = Book(
-            name  = name,
-            isbn13=isbn13,
-            author=author
-        )
+        # check if we can get data from api
+        data = getBookData(isbn13)
+
+        if data is not False:
+            # we have gotten return data
+            new_book = Book(
+                name  = data[0],
+                isbn13= data[2],
+                author= data[1]
+            )
+
+        else:
+            # package a new Book object
+            new_book = Book(
+                name  = name,
+                isbn13=isbn13,
+                author=author
+            )
 
         # save the new object
         try:
