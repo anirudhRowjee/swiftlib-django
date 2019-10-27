@@ -5,5 +5,5 @@ urlpatterns = [
     path('', views.home, name='issues-home'),
     path('issue-book', views.issuebook, name='issuebook'),
     path('returnbooks/', views.returnbook, name='returnbook'),
-    path('issueinfo/', views.issueinfo, name='issueinfo')
+    path('issueinfo/<int:issue_id>', views.issueinfo, name='issueinfo')
 ]

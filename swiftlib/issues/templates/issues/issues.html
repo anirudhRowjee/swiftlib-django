@@ -6,11 +6,11 @@
 {% block content %}
      <div class='container'>
          <div class='header mx-auto'>
-             <h1 class='pageheader-text'> ISSUES - PENDING BOOKS </h1>
+             <h1 class='pageheader-text'> ISSUES  </h1>
          </div>
         <div class='mx-auto'>
             <!-- show all books pending to be returned -->
-            <h3 class='pageheader-text'> Select Criteria -  </h3>
+            <h3 class='pageheader-text'> Search  </h3>
 
             <div class=' mx-auto' id='issues-bar'>
                 <!-- selection for search and sort criteria -->
@@ -23,6 +23,7 @@
                             <option value='book_isbn'> ISBN of Book Issued </option>
                             <option value='book_name'> Name of Book Issued </option>
                             <option value='student_name'> Borrowed By (name of student) </option>
+                            <option value='student_id'> Borrowed By (ID of student) </option>
                         </select>
                         </div>
                         <button type='submit' id='searchbutton' onclick='submit' class='btn input-group-addon'><strong> GO </strong><i class="fas fa-angle-right"></i> </button>
@@ -34,15 +35,53 @@
         <div class='mx-auto' name='results'>
             <h4 class='pageheader-text mx-auto'> Search Results </h4>
             {% for result in results %}
-                <div class='std-info-mini row mx-auto container'>
+                <div class='std-info-mini row mx-auto container' data-toggle="modal" data-target="#issue{{result.id}}info">
                     <p class='student-name col-sm my-auto'> {{ result }} </p>
                 </div>
-            {% endfor %}
+                <br>
+                <div class="modal fade" id="issue{{result.id}}info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog s-modal modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header s-modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"> Book Information </h5>
+                                <button type="button" class="close whiteicon" data-dismiss="modal" aria-label="Close" onclick='window.location.reload()'>
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body s-modal-body">
+                                <!-- IFRAME FOR BOOK INFO PAGE HERE -->
+                                <iframe class='mx-auto iframe-custom iframe-lg' width='100%' scrolling="no" src="{% url 'issueinfo' issue_id=result.id %}">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
+            {% empty %}
+                <h1 class='pageheader-text mx-auto' style='color:red'> NO RESULTS FOUND </h1>
+            {% endfor %}
         {% else %}
             {% for issue in default %}
-                <div class='std-info-mini row mx-auto container'>
+                <div class='std-info-mini row mx-auto container' data-toggle='modal' data-target='#issue{{issue.id}}info'>
                     <p class='student-name col-sm my-auto'> {{ issue }} </p>
+                </div>
+                <br>
+                <div class="modal  fade" id="issue{{issue.id}}info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog s-modal modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header s-modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"> Book Information </h5>
+                                <button type="button" class="close whiteicon" data-dismiss="modal" aria-label="Close" onclick='window.location.reload()'>
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body s-modal-body">
+                                <!-- IFRAME FOR BOOK INFO PAGE HERE -->
+                                <iframe class='mx-auto iframe-custom iframe-lg' width='100%' scrolling="no" src="{% url 'issueinfo' issue_id=issue.id %}">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             {% empty %}
                 <p class='pageheader-text'> NO ISSUES! </p>

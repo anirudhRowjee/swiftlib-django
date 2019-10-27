@@ -1,4 +1,6 @@
-function AddStudentSubmit(){
-    
-    document.getElementById('student-add-form').style.backgroundColor='green';
-}
+document.onload(
+    console.log("Hello World!");
+);
+
+
+

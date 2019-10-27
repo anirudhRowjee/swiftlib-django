@@ -18,6 +18,7 @@ body{
 .greyicon{color:grey;}
 .blackicon{color:black;}
 .mainicon{color:red}
+.cyanicon{color: #6FFFE9;}
 
 .vertical-center {
     min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
@@ -71,6 +72,8 @@ body{
 .logincard{
     width: 50%;
     font-family: 'IBM Plex Sans';
+    background-color: transparent;
+    border: 1px solid #6FFFEC;
 }
 
 .loginbutton{
@@ -81,6 +84,10 @@ body{
     height:150px;
     width: 150px;
 }   
+
+.loginprompt{
+    color: #6FFFE9;
+}
 
 .header{
     text-align: center;
@@ -100,6 +107,7 @@ body{
     border: 1px solid #FCFCFC;
     border-radius: 5px;
     background-color:transparent;
+    color: #FCFCFC;
 }
 
 #searchbar:focus{
@@ -181,14 +189,18 @@ body{
     border-bottom: none;
 }
 
+.modal-content{
+    height: auto + 50px;
+}
+
 .s-modal-body{
     background-color: #020202;
-    height: auto;
 }
 
 .s-modal{
     border: 1px solid #6FFFE9;
     border-radius: 5px;
+    height: auto;
 }
 
 .iframe-custom{
@@ -409,4 +421,20 @@ text-color:white;
 .iframe-cust-lg {
     border: none;
     height: 400px;
+}
+
+
+.validBox{
+    border: 1px solid green;
+    background-color: green;
+    color: white;
+}
+
+.iframe-lg{
+    height: 200px;
+    display: block;
+}
+
+.tooltip-icon{
+    padding: 9px;
 }

@@ -73,8 +73,3 @@ def logout_view(request):
     auth.logout(request)
     return redirect('login')
 
-""" changelog -
-1. remove quick action buttons
-2. finish search feature
-"""
-

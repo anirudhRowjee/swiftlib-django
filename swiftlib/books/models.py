@@ -7,7 +7,7 @@ class Book(models.Model):
 
     name = models.CharField(max_length=252)
     author = models.CharField(max_length=252,null=True)
-    isbn13 = models.CharField(max_length=13, blank=True)
+    isbn13 = models.CharField(max_length=13, blank=True, unique=True)
 
     # book pretty name
     def __str__(self):

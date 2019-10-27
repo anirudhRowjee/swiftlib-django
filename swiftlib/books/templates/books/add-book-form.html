@@ -5,26 +5,26 @@
 <link rel="stylesheet" href="{% static 'assets/style.css' %}">
 
 <form method='POST' url='#' id='add-book-form'>
-    {% csrf_token %}
+    <div id='csrftoken'> {% csrf_token %} </div>
+    
+    <div class='form-group custom-formgroup'>
+        <label class='customlabel' for='isbn13'> Book ISBN / ID <i class="fas fa-info-circle cyanicon tooltip-icon" data-toggle="tooltip" data-placement="left" title="for some ISBNs, book details will fill automatically!"></i> </label>
+        <input type='text' class='form-control custom-input' name='isbn13' placeholder='ISBN of Book' onchange='console.log("changed");' id='isbn'>
+    </div>
     <div class='form-group custom-formgroup'>
         <label class='customlabel' for='name'> Book Name </label>
-        <input type='text' class='form-control custom-input' name='name' placeholder='Name of Book'>
+        <input type='text' class='form-control custom-input' name='name' placeholder='Name of Book' id='bookname'>
     </div>
-    <div class='form-group custom-formgroup'>
-        <label class='customlabel' for='isbn13'> Book ISBN / ID </label>
-        <input type='text' class='form-control custom-input' name='isbn13' placeholder='ISBN of Book'>
-    </div>
-
     <div class='form-group custom-formgroup'>
         <label class='customlabel' for='author'> Author name </label>
-        <input type='text' class='form-control custom-input' name='author' placeholder='Name of Author'>
+        <input type='text' class='form-control custom-input' name='author' placeholder='Name of Author' id='author'>
     </div>
 
     <button class='btn btn-primary custom-submit-button' action='submit'>Add Book </button>
     <small class="form-text text-muted"> Please ensure Book Name and ISBN are entered correctly. </small>
 </form>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script rel='application/javascript' src="{% static 'assets/app.js' %}"></script>

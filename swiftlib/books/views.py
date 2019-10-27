@@ -3,9 +3,12 @@ from django.db import IntegrityError
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.http import JsonResponse
 
 from .models import Book
 from .libs import getBookData
+
+import json
 
 def send_success(request, message):
     context = {
@@ -18,6 +21,9 @@ def send_failure(request, message):
         'failure_message': message
         }
     return render(request, 'status.html', context)
+
+def validateISBN(isbn):
+    return str(''.join([x for x in isbn if x.isdigit()]))
 
 # Create your views here.
 
@@ -44,43 +50,53 @@ def addbook(request):
         isbn13 = str(data.get('isbn13'))
         author=str(data.get('author'))
 
-        # check if we can get data from api
-        data = getBookData(isbn13)
+        isbn13 = validateISBN(isbn13)
 
-        if data is not False:
-            # we have gotten return data
-            new_book = Book(
-                name  = data[0],
-                isbn13= data[2],
-                author= data[1]
-            )
-
-        else:
-            # package a new Book object
-            new_book = Book(
-                name  = name,
-                isbn13=isbn13,
-                author=author
-            )
+           # package a new Book object
+        new_book = Book(
+            name  = name,
+            isbn13=isbn13,
+            author=author
+        )
 
         # save the new object
         try:
             new_book.save()
 
-        # check if the student already exists
+        # check if the book already exists
         except IntegrityError:
             message = 'Book already exists'
             return send_failure(request, message)
 
         # package success data
-    
+
         message="Book "+ new_book.name + " added! "
-        
+
         return send_success(request, message)
 
     else:
         # user wants to add data / is not reaching before any operation
         return render(request, 'books/add-book-form.html')
+
+@login_required
+def isValidISBN(request):
+    if request.method == 'GET':
+        data = request.GET
+        isbn = data['isbn']
+        isbn = validateISBN(isbn)
+
+        data = getBookData(isbn)
+
+        if data is False:
+            return JsonResponse({'status':'failure'}) 
+        else:
+            return_data = {
+                'status': 'found',
+                'isbn13': data[2],
+                'name': data[0],
+                'author': data[1]
+            }
+            return JsonResponse(return_data)
 
 @login_required
 def getbookinfo(request, isbn13):

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.db import IntegrityError
+from django.core.exceptions import ObjectDoesNotExist
 from datetime import datetime
 from . import models as issues
 from books import models as books
@@ -30,7 +31,7 @@ def home(request):
         if search_criteria == 'book_isbn':
             # search for similar ISBN of book issued
             isbn = int(search_query)
-            results = issues.Issue.objects.filter(book_issued__isbn13=isbn).filter(date_returned=None)
+            results = issues.Issue.objects.filter(book_issued__isbn13=isbn)
             context = {
                 'results': results,
                 'has_results': True,
@@ -56,10 +57,19 @@ def home(request):
                 'has_results': True,
             }
             return render(request, 'issues/issues.html', context)
+
+        if search_criteria == 'student_id':
+            pid = str(search_query)
+            results = issues.Issue.objects.filter(user_issued__pid__icontains=pid)
+            context = {
+                'results': results,
+                'has_results': True,
+            }
+            return render(request, 'issues/issues.html', context)
     else:
 
         # default - show latest 5 issued books
-        default = issues.Issue.objects.order_by('-date_issued')
+        default = issues.Issue.objects.order_by('-date_issued')[:5]
         context = {
             'has_results': False,
             'default': default,
@@ -81,11 +91,13 @@ def issuebook(request):
         new_issue = issues.Issue(
             user_issued = student_to_issue_to,
             book_issued = book_to_issue,
+            status = 'issued'
         )
 
         try:
             new_issue.save()
             student_to_issue_to.book_issued = book_to_issue
+            student_to_issue_to.save()
 
         except IntegrityError:
             message = 'Book has already been issued'
@@ -114,12 +126,16 @@ def returnbook(request):
 
         return_book = issues.Issue.objects.get(
             user_issued = student_issue,
-            book_issued = book_issue
+            book_issued = book_issue,
+            status = 'issued'
             )
 
         try:
             return_book.date_returned = now
+            return_book.status = 'returned'
             return_book.save()
+            student_issue.book_issued = None
+            student_issue.save()
 
         except:
             message = 'Book could not be returned'
@@ -129,12 +145,12 @@ def returnbook(request):
     else:
         return render(request, 'issues/issues-return-form.html')
 
+def issueinfo(request, issue_id):
+    #TODO - Add this method and set up modals for search results
+    try:
+        issue = issues.Issue.objects.get(id=issue_id)
+        context = {'issue': issue}
+        return render(request, 'issues/issues-info-form.html', context)
 
-
-@login_required
-def issueinfo(request):
-    if request.method == 'GET':
-        #TODO - Add this method and set up modals for search results
-        pass
-    else:
-        pass
+    except ObjectDoesNotExist:
+        return send_failure(request, "The Issue you are looking for does not exist")
