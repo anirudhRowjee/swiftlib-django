@@ -1,0 +1,7 @@
+[client]
+NAME = 'swiftlib'
+user = 'admin'
+password = '0018'
+host = 'localhost'
+
+

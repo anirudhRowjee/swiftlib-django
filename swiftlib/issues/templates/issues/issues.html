@@ -11,32 +11,48 @@
         <div class='mx-auto'>
             <!-- show all books pending to be returned -->
             <h3 class='pageheader-text'> Search  </h3>
-
             <div class=' mx-auto' id='issues-bar'>
                 <!-- selection for search and sort criteria -->
                 <form method='post' action='#' class='searchform'>
                     {% csrf_token %}
                     <div class='form-group issues-select-form searchform input-group'>
-                        <input type='text' id='searchbar' class='form-control' name='search_query' placeholder='Search in Issues'>
-                        <div class='searchoptions'>
-                        <select name='search_criteria' title='search_criteria' placeholder='search by' class='issue-selection-bar-content form-control-sm searchbar-drop my-auto'>
-                            <option value='book_isbn'> ISBN of Book Issued </option>
-                            <option value='book_name'> Name of Book Issued </option>
-                            <option value='student_name'> Borrowed By (name of student) </option>
-                            <option value='student_id'> Borrowed By (ID of student) </option>
-                        </select>
-                        </div>
+                        <input type='text' id='searchbar' class='form-control' name='search_query' placeholder='Search in Issues' required>
                         <button type='submit' id='searchbutton' onclick='submit' class='btn input-group-addon'><strong> GO </strong><i class="fas fa-angle-right"></i> </button>
+                    </div>
+                    <div class='form-group issues-select-form searchform input-group form-row'>
+                        <div class='searchoptions col-8' >
+                            <label for='search_criteria' class='pageheader-text filter_label'> Search By : </label>
+                            <select name='search_criteria' title='search_criteria' placeholder='search by' label='search criteria' class='issue-selection-bar-content form-control-sm searchbar-drop my-auto'>
+                                <option value='book_isbn'> ISBN of Book Issued </option>
+                                <option value='book_name'> Name of Book Issued </option>
+                                <option value='student_name'> Borrowed By (name of student) </option>
+                                <option value='student_id'> Borrowed By (ID of student) </option>
+                            </select>
+                        </div>
+                        <div class='searchoptions col-4' >
+                            <label for='filter_criteria' class='pageheader-text filter_label'> Filter By : </label>
+                            <select name='filter_criteria' title='filter_citeria' placeholder='filter by'  class='issue-selection-bar-content form-control-sm searchbar-drop my-auto'>
+                                <option value='issued_only'> Issued only </option>
+                                <option value='returned_only'> Returned only</option>
+                                <option value='both' selected> Issued and Returned</option>
+                            </select>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
+            <br>
         {% if has_results %}
         <div class='mx-auto' name='results'>
             <h4 class='pageheader-text mx-auto'> Search Results </h4>
             {% for result in results %}
                 <div class='std-info-mini row mx-auto container' data-toggle="modal" data-target="#issue{{result.id}}info">
                     <p class='student-name col-sm my-auto'> {{ result }} </p>
+                    {% if result.status == 'issued' %}
+                        <p class='student-name col-sm my-auto redicon' style='color:red;'> {{ result.status }} </p>
+                    {% elif result.status == 'returned' %}    
+                        <p class='student-name col-sm my-auto greenicon'style='color:green;'> {{ result.status }} </p>
+                    {% endif %}    
                 </div>
                 <br>
                 <div class="modal fade" id="issue{{result.id}}info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -64,6 +80,11 @@
             {% for issue in default %}
                 <div class='std-info-mini row mx-auto container' data-toggle='modal' data-target='#issue{{issue.id}}info'>
                     <p class='student-name col-sm my-auto'> {{ issue }} </p>
+                    {% if issue.status == 'issued' %}
+                        <p class='student-name col-sm my-auto redicon' style='color:red;'> {{ issue.status }} </p>
+                    {% elif issue.status == 'returned' %}    
+                        <p class='student-name col-sm my-auto greenicon'style='color:green;'> {{ issue.status }} </p>
+                    {% endif %}    
                 </div>
                 <br>
                 <div class="modal  fade" id="issue{{issue.id}}info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

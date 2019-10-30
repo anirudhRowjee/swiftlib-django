@@ -19,6 +19,14 @@ def send_failure(request, message):
         }
     return render(request, 'status.html', context)
 
+def get_filtered(qset, criteria):
+    if criteria == 'issued_only':
+        return qset.filter(status = 'issued')
+    elif criteria == 'returned_only':
+        return qset.filter(status = 'returned')
+    else:
+        return qset
+
 @login_required
 def home(request):
 
@@ -27,11 +35,13 @@ def home(request):
         data = request.POST
         search_query = data['search_query']
         search_criteria = data['search_criteria']
+        filter_criteria = data['filter_criteria']
 
         if search_criteria == 'book_isbn':
             # search for similar ISBN of book issued
             isbn = int(search_query)
             results = issues.Issue.objects.filter(book_issued__isbn13=isbn)
+            results = get_filtered(results, filter_criteria)
             context = {
                 'results': results,
                 'has_results': True,
@@ -42,6 +52,7 @@ def home(request):
             # search for similar name of book issued
             name = str(search_query)
             results = issues.Issue.objects.filter(book_issued__name__icontains=name)
+            results = get_filtered(results, filter_criteria)
             context = {
                 'results': results,
                 'has_results': True,
@@ -52,6 +63,7 @@ def home(request):
             # search for similar name of student to whom book is issued
             name = str(search_query)
             results = issues.Issue.objects.filter(user_issued__name__icontains=name)
+            results = get_filtered(results, filter_criteria)
             context = {
                 'results': results,
                 'has_results': True,
@@ -61,6 +73,7 @@ def home(request):
         if search_criteria == 'student_id':
             pid = str(search_query)
             results = issues.Issue.objects.filter(user_issued__pid__icontains=pid)
+            results = get_filtered(results, filter_criteria)
             context = {
                 'results': results,
                 'has_results': True,
@@ -69,7 +82,7 @@ def home(request):
     else:
 
         # default - show latest 5 issued books
-        default = issues.Issue.objects.order_by('-date_issued')[:5]
+        default = issues.Issue.objects.order_by('-date_issued')[:20]
         context = {
             'has_results': False,
             'default': default,
@@ -87,6 +100,14 @@ def issuebook(request):
 
         student_to_issue_to = students.Student.objects.get(pid=student_pid)
         book_to_issue = books.Book.objects.get(isbn13=book_isbn)
+
+        # check if the book has been issued toa student already
+        try:
+            check = students.Student.objects.get(book_issued = book_to_issue)
+            if check is not None:
+                return send_failure(request, "book has already been issued")
+        except ObjectDoesNotExist:
+            pass
 
         new_issue = issues.Issue(
             user_issued = student_to_issue_to,
@@ -123,6 +144,11 @@ def returnbook(request):
 
         student_issue = students.Student.objects.get(pid=student_pid)
         book_issue = books.Book.objects.get(isbn13=book_isbn)
+
+        try:
+            check = students.Student.objects.get(book_issued = book_issue)
+        except ObjectDoesNotExist:
+            return send_failure(request, "Book has not been issued to anyone")
 
         return_book = issues.Issue.objects.get(
             user_issued = student_issue,
