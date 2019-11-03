@@ -81,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'swiftlib',
-        'USER': 'root',
-        'PASSWORD': '0018',
+        'USER': 'admin',
+        'PASSWORD': '270302',
         'HOST': 'localhost',
     }
 }

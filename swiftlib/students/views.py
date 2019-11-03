@@ -1,5 +1,6 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import IntegrityError
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Student
@@ -11,6 +12,7 @@ def send_success(request, message):
         }
     return render(request, 'status.html', context)
 
+
 def send_failure(request, message):
     context = {
         'failure_message': message
@@ -18,6 +20,13 @@ def send_failure(request, message):
     return render(request, 'status.html', context)
 
 
+# one-time function to setup default admin user
+def initial_setup():
+    try:
+        admin_user = User.objects.get(username='admin', email='admin@swiftlib.com')
+    except ObjectDoesNotExist:
+        admin_user = User.objects.create_superuser(username='admin', email='admin@swiftlib.com', password='password')
+        admin_user.save()
 
 @login_required
 def home(request):
@@ -29,6 +38,7 @@ def home(request):
             'students': students,
         }
         return render(request, 'students/students.html', context)
+
 
 @login_required
 def addstudent(request):
