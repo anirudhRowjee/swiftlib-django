@@ -79,11 +79,12 @@ WSGI_APPLICATION = 'swiftlib.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'swiftlib',
-        'USER': 'admin',
-        'PASSWORD': '270302',
-        'HOST': 'localhost',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
+        #'NAME': 'swiftlib',
+        #'USER': 'admin',
+        #'PASSWORD': '270302',
+        #'HOST': 'localhost',
     }
 }
 
