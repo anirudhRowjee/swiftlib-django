@@ -14,28 +14,13 @@ def getBookData(isbn13):
         except exceptions.NotValidISBNError:
             return False
         return False
-    
-    length=len(data['Authors'])
-    
-    if length==1:
-        # Only one author
-        authorstring = data['Authors'][0]
-        
-    else:
-        # To get multiple author names in one element in one string
-        authorstring= ""
-        for i in range(0,length):
-            authorstring+=data['Authors'][i]
-            if i==(length-1):
-                # To avoid extra last comma
-                pass
-            else:
-                authorstring+=","
 
-               
+    authorstring = ', '.join(data['Authors'])
+
     name = data['Title']
-    author = authorstring 
+    author = authorstring
     isbn13 = data['ISBN-13']
 
-    print([name, author, isbn13])
     return [name, author, isbn13]
+
+
