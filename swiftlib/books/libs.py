@@ -7,7 +7,7 @@ def getBookData(isbn13):
     try:
         data = isbnlib.meta(str(isbn13), service='goob')
     except goob_exceptions.NoDataForSelectorError:
-        # google books not working
+        # Google books not working
         try:
             data_open = isbnlib.meta(str(isbn13))
             data = data_open
@@ -15,10 +15,12 @@ def getBookData(isbn13):
             return False
         return False
 
+    authorstring = ', '.join(data['Authors'])
+
     name = data['Title']
-    author = data['Authors'][0]
+    author = authorstring
     isbn13 = data['ISBN-13']
 
-    print([name, author, isbn13])
     return [name, author, isbn13]
+
 
