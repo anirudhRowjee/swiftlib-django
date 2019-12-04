@@ -1,4 +1,4 @@
-Django==2.1
+Django==2.1.11
 isbnlib==3.9.9
 mysqlclient==1.4.2.post1
 pkg-resources==0.0.0
