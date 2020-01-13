@@ -1,5 +1,4 @@
 Django==2.1
 isbnlib==3.9.9
 mysqlclient==1.4.2.post1
-pkg-resources==0.0.0
 pytz==2019.1
